@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#4c1d95"/>
+  <rect width="800" height="500" fill="url(#g)" opacity="0.3"/>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4c1d95" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <path d="M350 220 Q400 160 450 220 L470 300 L330 300 Z" fill="white" opacity="0.12"/>
+  <path d="M370 230 Q400 180 430 230" fill="none" stroke="white" stroke-width="2" opacity="0.15"/>
+  <circle cx="370" cy="250" r="6" fill="white" opacity="0.2"/>
+  <circle cx="400" cy="240" r="6" fill="white" opacity="0.2"/>
+  <circle cx="430" cy="250" r="6" fill="white" opacity="0.2"/>
+  <text x="400" y="340" text-anchor="middle" font-family="sans-serif" font-size="16" fill="white" opacity="0.5">Educación</text>
+</svg>
