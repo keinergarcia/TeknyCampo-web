@@ -1,77 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0e7490"/>
+  <rect width="800" height="500" fill="url(#g)" opacity="0.3"/>
   <defs>
-    <linearGradient id="roomBg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#E8F5E0"/>
-      <stop offset="100%" stop-color="#C8E6B6"/>
-    </linearGradient>
-    <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F5F5DC"/>
-      <stop offset="100%" stop-color="#E8E0C8"/>
-    </linearGradient>
-    <linearGradient id="boardGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2D5A27"/>
-      <stop offset="100%" stop-color="#1B3D17"/>
-    </linearGradient>
-    <linearGradient id="personGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#4A7C3F"/>
-      <stop offset="100%" stop-color="#2D5A27"/>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0e7490" stop-opacity="0.4"/>
     </linearGradient>
   </defs>
-  <rect width="800" height="500" fill="url(#roomBg)"/>
-  <rect x="0" y="320" width="800" height="180" fill="#D4C9A8"/>
-  <rect x="0" y="320" width="800" height="8" fill="#A0886A"/>
-  <rect x="80" y="40" width="640" height="12" fill="url(#wallGrad)"/>
-  <rect x="150" y="60" width="500" height="220" fill="#FAFAF0" rx="4"/>
-  <rect x="150" y="60" width="500" height="220" fill="url(#boardGrad)" rx="4"/>
-  <g fill="#fff" opacity="0.8">
-    <rect x="200" y="100" width="200" height="5" rx="2"/>
-    <rect x="200" y="120" width="300" height="5" rx="2"/>
-    <rect x="200" y="140" width="250" height="5" rx="2"/>
-    <rect x="200" y="170" width="280" height="5" rx="2"/>
-    <rect x="200" y="190" width="220" height="5" rx="2"/>
-    <circle cx="380" cy="225" r="10" fill="none" stroke="#fff" stroke-width="2" opacity="0.6"/>
-    <line x1="380" y1="235" x2="380" y2="255" stroke="#fff" stroke-width="2" opacity="0.6"/>
-    <line x1="365" y1="245" x2="395" y2="245" stroke="#fff" stroke-width="2" opacity="0.6"/>
-    <rect x="320" y="250" width="120" height="3" rx="1" opacity="0.5"/>
-  </g>
-  <g transform="translate(100, 260)">
-    <circle cx="0" cy="-60" r="20" fill="url(#personGrad)"/>
-    <path d="M-25,-30 Q-30,10 -20,40 L20,40 Q30,10 25,-30Z" fill="url(#personGrad)"/>
-  </g>
-  <g transform="translate(250, 270)">
-    <circle cx="0" cy="-50" r="16" fill="url(#personGrad)"/>
-    <path d="M-20,-25 Q-25,10 -16,35 L16,35 Q25,10 20,-25Z" fill="url(#personGrad)"/>
-  </g>
-  <g transform="translate(370, 265)">
-    <circle cx="0" cy="-55" r="18" fill="url(#personGrad)"/>
-    <path d="M-22,-27 Q-27,10 -18,38 L18,38 Q27,10 22,-27Z" fill="url(#personGrad)"/>
-  </g>
-  <g transform="translate(490, 272)">
-    <circle cx="0" cy="-48" r="15" fill="url(#personGrad)"/>
-    <path d="M-18,-24 Q-23,10 -15,33 L15,33 Q23,10 18,-24Z" fill="url(#personGrad)"/>
-  </g>
-  <g transform="translate(600, 268)">
-    <circle cx="0" cy="-52" r="17" fill="url(#personGrad)"/>
-    <path d="M-20,-26 Q-25,10 -17,36 L17,36 Q25,10 20,-26Z" fill="url(#personGrad)"/>
-  </g>
-  <g transform="translate(700, 270)">
-    <circle cx="0" cy="-50" r="16" fill="url(#personGrad)"/>
-    <path d="M-20,-25 Q-25,10 -16,35 L16,35 Q25,10 20,-25Z" fill="url(#personGrad)"/>
-  </g>
-  <g transform="translate(160, 395)">
-    <circle cx="0" cy="-50" r="16" fill="url(#personGrad)"/>
-    <path d="M-20,-25 Q-25,10 -16,35 L16,35 Q25,10 20,-25Z" fill="url(#personGrad)"/>
-  </g>
-  <rect x="170" y="420" width="80" height="40" fill="#5C8F4A" rx="3" opacity="0.7"/>
-  <g transform="translate(540, 395)">
-    <circle cx="0" cy="-50" r="16" fill="url(#personGrad)"/>
-    <path d="M-20,-25 Q-25,10 -16,35 L16,35 Q25,10 20,-25Z" fill="url(#personGrad)"/>
-  </g>
-  <rect x="550" y="420" width="80" height="40" fill="#5C8F4A" rx="3" opacity="0.7"/>
-  <g transform="translate(640, 400)">
-    <circle cx="0" cy="-45" r="14" fill="url(#personGrad)"/>
-    <path d="M-18,-22 Q-22,10 -14,32 L14,32 Q22,10 18,-22Z" fill="url(#personGrad)"/>
-  </g>
-  <rect x="650" y="420" width="80" height="40" fill="#5C8F4A" rx="3" opacity="0.7"/>
-  <rect x="0" y="460" width="800" height="40" fill="#2D5A27" opacity="0.3"/>
+  <rect x="300" y="160" width="200" height="140" rx="8" fill="white" opacity="0.12"/>
+  <text x="400" y="235" text-anchor="middle" font-family="sans-serif" font-size="48" fill="white" opacity="0.2">📚</text>
+  <text x="400" y="340" text-anchor="middle" font-family="sans-serif" font-size="16" fill="white" opacity="0.5">Capacitación</text>
 </svg>

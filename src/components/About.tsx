@@ -41,62 +41,45 @@ export default function About() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 bg-green-100 text-green-700 text-sm font-medium rounded-full mb-4">
-            Quiénes Somos
+            Sobre Nosotros
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            COOPROMU - Cooperativa de Productores Municipales
+            Tekny Campo Soluciones Agropecuarias
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            Somos una cooperativa sin ánimo de lucro, compuesta por personas unidas por la solidaridad
-            y el compromiso con el desarrollo económico y social de nuestra comunidad.
+            Trabajamos con compromiso, responsabilidad e innovación para fortalecer el sector rural colombiano,
+            brindando soluciones integrales orientadas al desarrollo agrícola y ganadero.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <SectionCard id="historia" icon={Clock} title="Historia" delay={0}>
             <p>
-              COOPROMU nació hace 3 años gracias al sueño de un grupo de agricultores comprometidos
-              con mejorar las condiciones de vida del campo colombiano.
+              Tekny Campo Soluciones Agropecuarias nació con el propósito de apoyar el desarrollo del sector agropecuario colombiano mediante soluciones innovadoras y acompañamiento técnico especializado.
             </p>
             <p className="mt-3">
-              Impulsados por los principios de cooperación, solidaridad y trabajo en equipo,
-              estos agricultores decidieron unir esfuerzos para crear una organización que promoviera
-              el desarrollo rural y fortaleciera la economía de la región.
+              Desde sus inicios, la empresa ha trabajado junto a productores, asociaciones, entidades públicas y organizaciones rurales, ofreciendo insumos, capacitación y asesoría para mejorar la productividad y sostenibilidad del campo.
             </p>
             <p className="mt-3">
-              Hoy, COOPROMU beneficia a numerosas familias campesinas de la provincia de Ocaña,
-              brindando apoyo en la producción, comercialización y fortalecimiento del sector agrícola.
+              A lo largo de su trayectoria, Tekny Campo ha participado en proyectos agropecuarios que han contribuido al fortalecimiento de comunidades rurales y al crecimiento del sector agrícola y ganadero en la región.
             </p>
           </SectionCard>
 
           <SectionCard id="mision" icon={Target} title="Misión" delay={0.1}>
             <p>
-              Fomentar el desarrollo integral de los productores municipales a través de la planificación
-              estratégica, la educación continua y el fortalecimiento de la cultura cooperativa.
-            </p>
-            <p className="mt-3">
-              Promovemos la comercialización y el mercadeo de productos locales con un enfoque sostenible,
-              facilitando el consumo responsable y ofreciendo servicios especiales que mejoren la calidad
-              de vida de nuestros miembros.
+              Somos una empresa comprometida con el desarrollo del sector agropecuario, dedicada a brindar soluciones tecnológicas, suministro de insumos, capacitación y acompañamiento técnico, orientados a mejorar la productividad, sostenibilidad y competitividad del campo colombiano, promoviendo el crecimiento integral de productores y comunidades rurales.
             </p>
           </SectionCard>
 
           <SectionCard id="vision" icon={Eye} title="Visión" delay={0.2}>
             <p>
-              Ser una cooperativa líder en el fortalecimiento de la economía local, destacada por su
-              capacidad de planificación, innovación y producción agropecuaria sostenible y sustentable.
-            </p>
-            <p className="mt-3">
-              Nos proyectamos como un modelo de cooperación eficiente en la comercialización,
-              mercadeo y consumo responsable de productos locales.
+              Ser una empresa líder y reconocida en el sector agropecuario colombiano por brindar soluciones innovadoras, sostenibles y de alta calidad, contribuyendo al desarrollo productivo del campo, al fortalecimiento de las comunidades rurales y a la transformación tecnológica del sector agropecuario.
             </p>
           </SectionCard>
 
           <SectionCard id="objetivos" icon={Flag} title="Objetivo General" delay={0.1}>
             <p>
-              Fortalecer la producción agropecuaria local mediante asistencia técnica, capacitación
-              y comercialización justa, promoviendo prácticas sostenibles y la educación continua
-              de nuestros miembros.
+              Impulsar el desarrollo sostenible y productivo del sector agropecuario colombiano mediante soluciones integrales, asistencia técnica, capacitación y suministro de insumos de alta calidad.
             </p>
           </SectionCard>
 
@@ -104,23 +87,23 @@ export default function About() {
             <ul className="space-y-2">
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Solidaridad:</strong> Trabajo conjunto para el beneficio colectivo.</span>
+                <span><strong>Compromiso:</strong> Dedicación total con el campo colombiano.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Compromiso:</strong> Con el desarrollo económico y social.</span>
+                <span><strong>Responsabilidad:</strong> Cumplimiento y seriedad en cada proyecto.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Cooperación:</strong> Colaboración activa con el sector solidario.</span>
+                <span><strong>Innovación:</strong> Búsqueda constante de nuevas soluciones.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Educación:</strong> Capacitación continua de nuestros miembros.</span>
+                <span><strong>Calidad:</strong> Excelencia en productos y servicios.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Sostenibilidad:</strong> Prácticas responsables con el ambiente.</span>
+                <span><strong>Servicio al cliente:</strong> Atención personalizada y cercana.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
@@ -137,8 +120,8 @@ export default function About() {
                   <Award className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-semibold">Cooperativa sin Ánimo de Lucro</div>
-                  <div className="text-sm text-green-200">Compromiso social real</div>
+                  <div className="font-semibold">Experiencia Comprobada</div>
+                  <div className="text-sm text-green-200">Proyectos ejecutados con éxito</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -146,8 +129,8 @@ export default function About() {
                   <Users className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-semibold">Gestión Democrática</div>
-                  <div className="text-sm text-green-200">Todos los asociados participan</div>
+                  <div className="font-semibold">Acompañamiento Técnico</div>
+                  <div className="text-sm text-green-200">Asesoría especializada permanente</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -155,8 +138,8 @@ export default function About() {
                   <TrendingUp className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-semibold">Comercialización Justa</div>
-                  <div className="text-sm text-green-200">Precios justos para productores</div>
+                  <div className="font-semibold">Soluciones Integrales</div>
+                  <div className="text-sm text-green-200">Todo para tu producción</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">

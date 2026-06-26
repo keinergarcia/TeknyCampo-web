@@ -1,32 +1,12 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Send, CheckCircle, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { ArrowLeft, Send, CheckCircle, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useContactForm } from '../hooks/useContactForm';
 import { contactInfo, contactSubjects } from '../data/contact';
+import pageBg from '../assets/images/backgrounds/hero-bg.png';
 
-function SocialLinks() {
-  return (
-    <div className="bg-green-800 rounded-2xl p-8 text-white">
-      <h3 className="text-xl font-bold mb-4">Síguenos en redes sociales</h3>
-      <p className="text-green-200 mb-6 text-sm">
-        Mantente conectado con nosotros y entérate de las últimas novedades y tips agrícolas.
-      </p>
-      <div className="flex items-center gap-3">
-        <a href="#" className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors" aria-label="Facebook" title="Facebook">
-          <Facebook className="w-5 h-5" />
-        </a>
-        <a href="#" className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors" aria-label="Instagram" title="Instagram">
-          <Instagram className="w-5 h-5" />
-        </a>
-        <a href="#" className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors" aria-label="LinkedIn" title="LinkedIn">
-          <Linkedin className="w-5 h-5" />
-        </a>
-      </div>
-    </div>
-  );
-}
-
-function ContactForm() {
+function PageContactForm() {
   const { formData, submitted, sending, error, handleChange, handleSubmit } = useContactForm();
 
   if (submitted) {
@@ -92,53 +72,75 @@ function ContactForm() {
   );
 }
 
-export default function Contact() {
+export default function ContactPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 bg-green-100 text-green-700 text-sm font-medium rounded-full mb-4">
-            Contacto
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Estamos aquí para ayudarte
-          </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+    <div className="min-h-screen bg-white">
+      <div className="relative pt-32 pb-20 overflow-hidden">
+        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm mb-6">
+            <ArrowLeft className="w-4 h-4" />
+            Volver al inicio
+          </Link>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.8)' }}>Contacto</h1>
+          <p className="text-lg text-white max-w-2xl" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.8)' }}>
             Ponte en contacto con nosotros. Nuestro equipo de expertos está listo para atender tus consultas y brindarte la mejor solución.
           </p>
-        </motion.div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 pb-20">
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          {contactInfo.map((card, index) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative group"
+            >
+              <div className="absolute -inset-0.5 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
+              <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-green-200/50 shadow-xl hover:shadow-green-500/10 transition-all duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-green-500/20">
+                  <card.icon className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="text-xs font-semibold text-green-600 uppercase tracking-widest mb-1">{card.title}</h4>
+                <p className="text-lg font-bold text-slate-900 mb-1">{card.value}</p>
+                <p className="text-sm text-slate-500">{card.detail}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              {contactInfo.map((info) => (
-                <div key={info.title} className="bg-slate-50 rounded-xl p-5 border border-slate-100">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
-                    <info.icon className="w-5 h-5 text-green-700" />
-                  </div>
-                  <h4 className="font-semibold text-slate-900 text-sm mb-1">{info.title}</h4>
-                  <p className="text-slate-900 font-medium">{info.value}</p>
-                  <p className="text-sm text-slate-500 mt-1">{info.detail}</p>
-                </div>
-              ))}
+            <div className="bg-green-800 rounded-2xl p-8 text-white mb-6">
+              <h3 className="text-xl font-bold mb-4">Síguenos en redes sociales</h3>
+              <p className="text-green-200 mb-6 text-sm">
+                Mantente conectado con nosotros y entérate de las últimas novedades y tips agrícolas.
+              </p>
+              <div className="flex items-center gap-3">
+                <a href="#" className="w-12 h-12 bg-green-700 rounded-xl flex items-center justify-center hover:bg-green-600 transition-colors" aria-label="Facebook" title="Facebook">
+                  <Facebook className="w-6 h-6" />
+                </a>
+                <a href="#" className="w-12 h-12 bg-green-700 rounded-xl flex items-center justify-center hover:bg-green-600 transition-colors" aria-label="Instagram" title="Instagram">
+                  <Instagram className="w-6 h-6" />
+                </a>
+                <a href="#" className="w-12 h-12 bg-green-700 rounded-xl flex items-center justify-center hover:bg-green-600 transition-colors" aria-label="LinkedIn" title="LinkedIn">
+                  <Linkedin className="w-6 h-6" />
+                </a>
+              </div>
             </div>
 
-            <SocialLinks />
-
-            <div className="mt-6 rounded-2xl overflow-hidden border border-slate-200 h-48 sm:h-64">
+            <div className="rounded-2xl overflow-hidden border border-slate-200 h-56 sm:h-72 md:h-80">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!4v1781798615303!6m8!1m7!1sz0lmAjVpReBkoHi6pfijrQ!2m2!1d8.237213289825238!2d-73.3563884894518!3f173.50814703499464!4f-3.817710191445599!5f0.7820865974627469"
                 width="100%"
@@ -153,13 +155,13 @@ export default function Contact() {
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <ContactForm />
+            <PageContactForm />
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

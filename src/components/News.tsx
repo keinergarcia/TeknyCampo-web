@@ -1,15 +1,12 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { Calendar, ArrowRight } from 'lucide-react';
-import { getNews } from '../services/api';
+import { Link } from 'react-router-dom';
+import { Calendar, ArrowRight, User } from 'lucide-react';
+import { newsItems } from '../data/news';
 
 export default function News() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const navigate = useNavigate();
-  const allNews = getNews();
-  const news = allNews.slice(0, 3);
 
   return (
     <section className="py-20 bg-white">
@@ -25,16 +22,15 @@ export default function News() {
             Noticias y Novedades
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Últimas Noticias
+            Lo último del sector agropecuario
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Mantente al día con las novedades, eventos y logros de nuestra cooperativa
-            y el sector agrícola colombiano.
+            Mantente informado sobre las últimas tendencias, eventos y novedades del mundo agropecuario.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {news.map((item, index) => (
+          {newsItems.slice(0, 3).map((item, index) => (
             <motion.article
               key={item.title}
               initial={{ opacity: 0, y: 40 }}
@@ -57,20 +53,23 @@ export default function News() {
                     <Calendar className="w-3.5 h-3.5" />
                     {item.date}
                   </span>
+                  <span className="flex items-center gap-1">
+                    <User className="w-3.5 h-3.5" />
+                    {item.author}
+                  </span>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-700 transition-colors line-clamp-2">
+                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-700 transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-sm text-slate-600 mb-4 leading-relaxed line-clamp-3">
-                  {item.excerpt || item.content.substring(0, 150)}
+                  {item.excerpt}
                 </p>
-                <button
-                  onClick={() => navigate('/noticias')}
+                <Link to="/noticias"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 transition-colors"
                 >
                   Leer más
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
               </div>
             </motion.article>
           ))}

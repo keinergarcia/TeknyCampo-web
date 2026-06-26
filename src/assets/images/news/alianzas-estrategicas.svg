@@ -1,59 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#7c2d12"/>
+  <rect width="800" height="500" fill="url(#g)" opacity="0.3"/>
   <defs>
-    <linearGradient id="bgA" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#E8F5E0"/>
-      <stop offset="100%" stop-color="#C8E6B6"/>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#7c2d12" stop-opacity="0.4"/>
     </linearGradient>
-    <linearGradient id="handL" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#4A7C3F"/>
-      <stop offset="100%" stop-color="#2D5A27"/>
-    </linearGradient>
-    <linearGradient id="handR" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#5C8F4A"/>
-      <stop offset="100%" stop-color="#3D7A33"/>
-    </linearGradient>
-    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stop-color="#6DA85A" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#2D5A27" stop-opacity="0"/>
-    </radialGradient>
   </defs>
-  <rect width="800" height="500" fill="url(#bgA)"/>
-  <rect x="0" y="380" width="800" height="120" fill="#2D5A27" opacity="0.15"/>
-  <circle cx="400" cy="240" r="180" fill="url(#glowA)"/>
-  <g transform="translate(400, 220)">
-    <g>
-      <path d="M-90,-40 Q-95,-60 -85,-75 Q-75,-85 -65,-80 Q-55,-75 -50,-60 L-50,-40 Q-55,-35 -65,-35 Q-75,-35 -80,-30Z" fill="url(#handL)"/>
-      <path d="M-50,-60 Q-45,-75 -35,-80 Q-25,-85 -15,-75 Q-5,-60 -10,-40 L-15,-35 Q-25,-35 -35,-35 Q-45,-35 -50,-40Z" fill="url(#handL)"/>
-      <path d="M-65,-35 L-35,-35" stroke="#1B3D17" stroke-width="2" opacity="0.3"/>
-    </g>
-    <g>
-      <path d="M90,-40 Q95,-60 85,-75 Q75,-85 65,-80 Q55,-75 50,-60 L50,-40 Q55,-35 65,-35 Q75,-35 80,-30Z" fill="url(#handR)"/>
-      <path d="M50,-60 Q45,-75 35,-80 Q25,-85 15,-75 Q5,-60 10,-40 L15,-35 Q25,-35 35,-35 Q45,-35 50,-40Z" fill="url(#handR)"/>
-      <path d="M65,-35 L35,-35" stroke="#1B3D17" stroke-width="2" opacity="0.3"/>
-    </g>
-  </g>
-  <g transform="translate(400, 260)">
-    <circle cx="0" cy="-20" r="16" fill="#6DA85A" opacity="0.3"/>
-    <path d="M-12,10 L0,-10 L12,10" stroke="#2D5A27" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <line x1="0" y1="-5" x2="0" y2="15" stroke="#2D5A27" stroke-width="3" stroke-linecap="round"/>
-  </g>
-  <g transform="translate(400, 380)">
-    <path d="M-80,0 Q-40,-10 0,0 Q40,10 80,0" stroke="#4A8C3A" stroke-width="2" fill="none" opacity="0.5"/>
-  </g>
-  <g fill="#2D5A27" opacity="0.12">
-    <circle cx="150" cy="100" r="40"/>
-    <circle cx="650" cy="100" r="40"/>
-    <circle cx="100" cy="200" r="25"/>
-    <circle cx="700" cy="200" r="25"/>
-  </g>
-  <g fill="#4A8C3A" opacity="0.2">
-    <circle cx="180" cy="130" r="8"/>
-    <circle cx="620" cy="130" r="8"/>
-    <circle cx="140" cy="180" r="6"/>
-    <circle cx="660" cy="180" r="6"/>
-  </g>
-  <g stroke="#2D5A27" stroke-width="1.5" opacity="0.15">
-    <line x1="160" y1="100" x2="300" y2="200"/>
-    <line x1="640" y1="100" x2="500" y2="200"/>
-  </g>
+  <circle cx="340" cy="190" r="30" fill="white" opacity="0.12"/>
+  <circle cx="460" cy="190" r="30" fill="white" opacity="0.12"/>
+  <rect x="340" y="230" width="120" height="4" rx="2" fill="white" opacity="0.15"/>
+  <circle cx="400" cy="250" r="20" fill="white" opacity="0.08"/>
+  <text x="400" y="340" text-anchor="middle" font-family="sans-serif" font-size="16" fill="white" opacity="0.5">Alianzas</text>
 </svg>
