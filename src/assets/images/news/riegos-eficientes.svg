@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="skyR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#B8E0F0"/>
+    </linearGradient>
+    <linearGradient id="groundR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6DA85A"/>
+      <stop offset="100%" stop-color="#3D7A33"/>
+    </linearGradient>
+    <linearGradient id="pipeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5C8F4A"/>
+      <stop offset="100%" stop-color="#2D5A27"/>
+    </linearGradient>
+    <linearGradient id="dropGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5BA3E6"/>
+      <stop offset="100%" stop-color="#2E74B5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#skyR)"/>
+  <rect x="0" y="280" width="800" height="220" fill="url(#groundR)"/>
+  <rect x="0" y="280" width="200" height="220" fill="#7CB860" opacity="0.4"/>
+  <rect x="400" y="280" width="200" height="220" fill="#7CB860" opacity="0.4"/>
+  <g stroke="#2D5A27" stroke-width="1.5" opacity="0.3">
+    <line x1="20" y1="310" x2="180" y2="310"/>
+    <line x1="20" y1="340" x2="180" y2="340"/>
+    <line x1="20" y1="370" x2="180" y2="370"/>
+    <line x1="20" y1="400" x2="180" y2="400"/>
+    <line x1="20" y1="430" x2="180" y2="430"/>
+    <line x1="420" y1="310" x2="580" y2="310"/>
+    <line x1="420" y1="340" x2="580" y2="340"/>
+    <line x1="420" y1="370" x2="580" y2="370"/>
+    <line x1="420" y1="400" x2="580" y2="400"/>
+    <line x1="420" y1="430" x2="580" y2="430"/>
+  </g>
+  <g fill="#2D5A27" opacity="0.6">
+    <rect x="230" y="310" width="5" height="25" rx="2"/>
+    <rect x="250" y="305" width="5" height="30" rx="2"/>
+    <rect x="270" y="315" width="5" height="20" rx="2"/>
+    <rect x="630" y="310" width="5" height="25" rx="2"/>
+    <rect x="650" y="305" width="5" height="30" rx="2"/>
+    <rect x="670" y="315" width="5" height="20" rx="2"/>
+  </g>
+  <rect x="100" y="200" width="8" height="100" fill="url(#pipeGrad)"/>
+  <rect x="100" y="195" width="8" height="10" rx="4" fill="#1B3D17"/>
+  <circle cx="104" cy="195" r="6" fill="#2D5A27"/>
+  <rect x="300" y="220" width="8" height="80" fill="url(#pipeGrad)"/>
+  <rect x="300" y="215" width="8" height="10" rx="4" fill="#1B3D17"/>
+  <circle cx="304" cy="215" r="6" fill="#2D5A27"/>
+  <rect x="500" y="190" width="8" height="110" fill="url(#pipeGrad)"/>
+  <rect x="500" y="185" width="8" height="10" rx="4" fill="#1B3D17"/>
+  <circle cx="504" cy="185" r="6" fill="#2D5A27"/>
+  <rect x="700" y="210" width="8" height="90" fill="url(#pipeGrad)"/>
+  <rect x="700" y="205" width="8" height="10" rx="4" fill="#1B3D17"/>
+  <circle cx="704" cy="205" r="6" fill="#2D5A27"/>
+  <path d="M60,210 Q80,200 100,210" stroke="#2D5A27" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M100,210 Q200,230 300,220" stroke="#2D5A27" stroke-width="4" fill="none"/>
+  <path d="M300,220 Q400,200 500,190" stroke="#2D5A27" stroke-width="4" fill="none"/>
+  <path d="M500,190 Q600,220 700,210" stroke="#2D5A27" stroke-width="4" fill="none"/>
+  <g opacity="0.7">
+    <path d="M70,230 Q65,250 70,260 Q75,250 70,230Z" fill="url(#dropGrad)"/>
+    <path d="M95,235 Q90,255 95,265 Q100,255 95,235Z" fill="url(#dropGrad)"/>
+    <path d="M120,228 Q115,248 120,258 Q125,248 120,228Z" fill="url(#dropGrad)"/>
+    <path d="M270,240 Q265,260 270,270 Q275,260 270,240Z" fill="url(#dropGrad)"/>
+    <path d="M295,235 Q290,255 295,265 Q300,255 295,235Z" fill="url(#dropGrad)"/>
+    <path d="M325,230 Q320,250 325,260 Q330,250 325,230Z" fill="url(#dropGrad)"/>
+    <path d="M470,215 Q465,235 470,245 Q475,235 470,215Z" fill="url(#dropGrad)"/>
+    <path d="M495,210 Q490,230 495,240 Q500,230 495,210Z" fill="url(#dropGrad)"/>
+    <path d="M525,205 Q520,225 525,235 Q530,225 525,205Z" fill="url(#dropGrad)"/>
+    <path d="M670,230 Q665,250 670,260 Q675,250 670,230Z" fill="url(#dropGrad)"/>
+    <path d="M695,225 Q690,245 695,255 Q700,245 695,225Z" fill="url(#dropGrad)"/>
+    <path d="M725,220 Q720,240 725,250 Q730,240 725,220Z" fill="url(#dropGrad)"/>
+  </g>
+  <circle cx="110" cy="260" r="4" fill="#5BA3E6" opacity="0.6"/>
+  <circle cx="130" cy="255" r="3" fill="#5BA3E6" opacity="0.5"/>
+  <circle cx="320" cy="255" r="4" fill="#5BA3E6" opacity="0.6"/>
+  <circle cx="340" cy="250" r="3" fill="#5BA3E6" opacity="0.5"/>
+  <circle cx="510" cy="245" r="4" fill="#5BA3E6" opacity="0.6"/>
+  <circle cx="530" cy="240" r="3" fill="#5BA3E6" opacity="0.5"/>
+  <circle cx="710" cy="250" r="4" fill="#5BA3E6" opacity="0.6"/>
+  <circle cx="730" cy="245" r="3" fill="#5BA3E6" opacity="0.5"/>
+  <ellipse cx="400" cy="120" rx="80" ry="15" fill="#fff" opacity="0.25"/>
+  <ellipse cx="200" cy="90" rx="60" ry="10" fill="#fff" opacity="0.2"/>
+</svg>

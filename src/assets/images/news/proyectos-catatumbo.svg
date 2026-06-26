@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="skyN" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="60%" stop-color="#B8E0F0"/>
+      <stop offset="100%" stop-color="#E8F5E0"/>
+    </linearGradient>
+    <linearGradient id="mtn1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A7C3F"/>
+      <stop offset="100%" stop-color="#3B6B30"/>
+    </linearGradient>
+    <linearGradient id="mtn2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5C8F4A"/>
+      <stop offset="100%" stop-color="#2D5A27"/>
+    </linearGradient>
+    <linearGradient id="fieldN" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6DA85A"/>
+      <stop offset="100%" stop-color="#3D7A33"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#skyN)"/>
+  <path d="M0,300 L120,180 L250,260 L380,150 L500,230 L620,170 L750,250 L800,220 L800,500 L0,500Z" fill="url(#mtn1)"/>
+  <path d="M0,350 L150,240 L300,310 L450,220 L580,280 L700,230 L800,290 L800,500 L0,500Z" fill="url(#mtn2)"/>
+  <rect x="0" y="340" width="800" height="160" fill="url(#fieldN)"/>
+  <rect x="0" y="340" width="160" height="160" fill="#7CB860" opacity="0.5"/>
+  <rect x="320" y="340" width="160" height="160" fill="#7CB860" opacity="0.5"/>
+  <rect x="640" y="340" width="160" height="160" fill="#7CB860" opacity="0.5"/>
+  <g stroke="#2D5A27" stroke-width="1.5" opacity="0.4">
+    <line x1="20" y1="370" x2="140" y2="370"/>
+    <line x1="20" y1="395" x2="140" y2="395"/>
+    <line x1="20" y1="420" x2="140" y2="420"/>
+    <line x1="20" y1="445" x2="140" y2="445"/>
+    <line x1="20" y1="470" x2="140" y2="470"/>
+    <line x1="340" y1="370" x2="460" y2="370"/>
+    <line x1="340" y1="395" x2="460" y2="395"/>
+    <line x1="340" y1="420" x2="460" y2="420"/>
+    <line x1="340" y1="445" x2="460" y2="445"/>
+    <line x1="340" y1="470" x2="460" y2="470"/>
+    <line x1="660" y1="370" x2="780" y2="370"/>
+    <line x1="660" y1="395" x2="780" y2="395"/>
+    <line x1="660" y1="420" x2="780" y2="420"/>
+    <line x1="660" y1="445" x2="780" y2="445"/>
+    <line x1="660" y1="470" x2="780" y2="470"/>
+  </g>
+  <g fill="#D2691E">
+    <rect x="180" y="420" width="50" height="35" rx="3"/>
+    <polygon points="180,420 205,390 230,420"/>
+    <rect x="520" y="430" width="50" height="35" rx="3"/>
+    <polygon points="520,430 545,400 570,430"/>
+  </g>
+  <g fill="#8B4513" opacity="0.5">
+    <rect x="80" y="380" width="14" height="8" rx="2"/>
+    <rect x="110" y="375" width="14" height="8" rx="2"/>
+    <rect x="400" y="385" width="14" height="8" rx="2"/>
+    <rect x="430" y="380" width="14" height="8" rx="2"/>
+  </g>
+  <circle cx="680" cy="80" r="40" fill="#FFD700" opacity="0.6"/>
+  <circle cx="680" cy="80" r="25" fill="#FFD700"/>
+  <ellipse cx="200" cy="80" rx="60" ry="12" fill="#fff" opacity="0.3"/>
+  <ellipse cx="500" cy="60" rx="70" ry="10" fill="#fff" opacity="0.25"/>
+</svg>
