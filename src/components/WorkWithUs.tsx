@@ -1,19 +1,50 @@
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Send, Briefcase, CheckCircle, Upload } from 'lucide-react';
 import { useJobForm } from '../hooks/useJobForm';
+import { getJobs } from '../lib/public';
+import type { PublicJob } from '../lib/public';
 
-const jobs = [
-  { title: 'Ingeniero Agrónomo', type: 'Tiempo completo', location: 'Ocaña' },
-  { title: 'Asesor Técnico Comercial', type: 'Tiempo completo', location: 'Norte de Santander' },
-  { title: 'Especialista en Nutrición Animal', type: 'Tiempo completo', location: 'Ocaña' },
-  { title: 'Técnico de Campo', type: 'Tiempo completo', location: 'Catatumbo' },
-];
+function JobsSkeleton() {
+  return (
+    <div className="space-y-4">
+      {[0, 1, 2, 3].map((i) => (
+        <div key={i} className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm animate-pulse">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 bg-slate-200 rounded-lg shrink-0" />
+            <div className="flex-1 space-y-2">
+              <div className="h-4 bg-slate-200 rounded w-3/4" />
+              <div className="flex items-center gap-3">
+                <div className="h-3 bg-slate-200 rounded w-20" />
+                <div className="h-3 bg-slate-200 rounded w-24" />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function WorkWithUs() {
   const { formData, file, submitted, sending, error, jobOptions, handleChange, handleFileChange, handleSubmit } = useJobForm();
+  const [jobs, setJobs] = useState<PublicJob[]>([]);
+  const [loading, setLoading] = useState(true);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  useEffect(() => {
+    let mounted = true;
+    getJobs().then((data) => {
+      if (!mounted) return;
+      setJobs(data);
+      setLoading(false);
+    }).catch(() => {
+      if (!mounted) return;
+      setLoading(false);
+    });
+    return () => { mounted = false; };
+  }, []);
 
   return (
     <section className="py-20 bg-slate-50">
@@ -43,25 +74,30 @@ export default function WorkWithUs() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="text-xl font-bold text-slate-900 mb-6">Vacantes disponibles</h3>
-            <div className="space-y-4">
-              {jobs.map((job) => (
-                <div key={job.title} className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
-                      <Briefcase className="w-5 h-5 text-green-700" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-slate-900">{job.title}</h4>
-                      <div className="flex items-center gap-3 text-sm text-slate-500 mt-1">
-                        <span>{job.type}</span>
-                        <span className="w-1 h-1 bg-slate-300 rounded-full" />
-                        <span>{job.location}</span>
+
+            {loading && <JobsSkeleton />}
+
+            {!loading && jobs.length > 0 && (
+              <div className="space-y-4">
+                {jobs.map((job) => (
+                  <div key={job.id} className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
+                        <Briefcase className="w-5 h-5 text-green-700" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-slate-900">{job.title}</h4>
+                        <div className="flex items-center gap-3 text-sm text-slate-500 mt-1">
+                          <span>{job.type}</span>
+                          <span className="w-1 h-1 bg-slate-300 rounded-full" />
+                          <span>{job.location}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             <div className="mt-8 bg-green-800 rounded-xl p-6 text-white">
               <h4 className="font-bold text-lg mb-2">Únete a nuestro equipo</h4>

@@ -1,9 +1,41 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Sprout, Tractor, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import heroBg from '../assets/images/backgrounds/hero-bg.png';
+import { getHeroStats } from '../lib/public';
+import type { PublicHeroStat } from '../lib/public';
+import heroBg from '../assets/images/backgrounds/hero-bg.webp';
+
+function StatsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="text-center animate-pulse">
+          <div className="h-9 bg-white/10 rounded w-16 mx-auto" />
+          <div className="h-4 bg-white/10 rounded w-24 mx-auto mt-2" />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Hero() {
+  const [stats, setStats] = useState<PublicHeroStat[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    getHeroStats().then((data) => {
+      if (!mounted) return;
+      setStats(data);
+      setLoading(false);
+    }).catch(() => {
+      if (!mounted) return;
+      setLoading(false);
+    });
+    return () => { mounted = false; };
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
@@ -65,23 +97,23 @@ export default function Hero() {
           </Link>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto"
-        >
-          {[
-            { value: '10+', label: 'Años de experiencia' },
-            { value: '200+', label: 'Proyectos ejecutados' },
-            { value: '100+', label: 'Clientes satisfechos' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-3xl font-bold text-green-300">{stat.value}</div>
-              <div className="text-sm text-white/70 mt-1">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
+        {loading && <StatsSkeleton />}
+
+        {!loading && stats.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto"
+          >
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="text-3xl font-bold text-green-300">{stat.value}</div>
+                <div className="text-sm text-white/70 mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       <motion.div

@@ -1,18 +1,46 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { entities } from '../data/entities';
+import { getEntities } from '../lib/public';
+import type { PublicEntity } from '../lib/public';
+
+function SkeletonCard() {
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-100 animate-pulse">
+      <div className="w-14 h-14 bg-gray-200 rounded-xl mb-4" />
+      <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
+      <div className="h-4 bg-gray-200 rounded w-full mb-1" />
+      <div className="h-4 bg-gray-200 rounded w-2/3" />
+    </div>
+  );
+}
 
 export default function Products() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [entities, setEntities] = useState<PublicEntity[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    getEntities().then((data) => {
+      if (!mounted) return;
+      setEntities(data);
+      setLoading(false);
+    }).catch((e) => {
+      if (!mounted) return;
+      setError(e.message);
+      setLoading(false);
+    });
+    return () => { mounted = false; };
+  }, []);
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section ref={ref} className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -29,38 +57,58 @@ export default function Products() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {entities.map((entity, index) => (
-            <motion.div
-              key={entity.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-white rounded-2xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
-                <entity.icon className="w-7 h-7 text-green-700" />
-              </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-1">{entity.fullName}</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">{entity.description}</p>
-            </motion.div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-slate-500">No pudimos cargar las entidades en este momento.</p>
+            <p className="text-slate-400 text-sm mt-2">Por favor intenta de nuevo más tarde.</p>
+          </div>
+        ) : entities.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-slate-500 text-lg">Próximamente</p>
+            <p className="text-slate-400 text-sm mt-2">Estamos actualizando nuestra lista de entidades.</p>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {entities.map((entity, index) => (
+                <motion.div
+                  key={entity.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group bg-white rounded-2xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
+                    <entity.icon className="w-7 h-7 text-green-700" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{entity.fullName}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{entity.description}</p>
+                </motion.div>
+              ))}
+            </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-12 text-center"
-        >
-          <Link
-            to="/productos"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-green-700 text-white font-semibold rounded-xl hover:bg-green-800 transition-colors shadow-lg"
-          >
-            Conoce más sobre nuestra experiencia
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-12 text-center"
+            >
+              <Link
+                to="/productos"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-green-700 text-white font-semibold rounded-xl hover:bg-green-800 transition-colors shadow-lg"
+              >
+                Conoce más sobre nuestra experiencia
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </>
+        )}
       </div>
     </section>
   );

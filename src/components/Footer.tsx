@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, ArrowUp } from 'lucide-react';
-import logoImg from '../assets/images/logos/teknycampo-icon.png';
+import logoImg from '../assets/images/logos/teknycampo-icon.webp';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -14,7 +14,7 @@ export default function Footer() {
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4">
               <div className="w-9 h-9 bg-green-700 rounded-lg overflow-hidden">
-                <img src={logoImg} alt="Tekny Campo" className="w-full h-full" />
+                <img src={logoImg} alt="Tekny Campo" loading="lazy" className="w-full h-full" />
               </div>
               <span className="text-xl font-bold">Tekny Campo</span>
             </Link>

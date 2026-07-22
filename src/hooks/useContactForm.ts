@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { submitContact } from '../lib/supabase';
+import { submitContactMessage } from '../lib/public';
 
 interface ContactFormData {
   nombre: string;
@@ -30,7 +30,7 @@ export function useContactForm() {
     setError('');
     setSending(true);
     try {
-      const { error: err } = await submitContact(formData);
+      const { error: err } = await submitContactMessage(formData);
       if (err) throw err;
       setSubmitted(true);
     } catch {

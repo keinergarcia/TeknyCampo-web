@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Target, Eye, Flag, Heart, Clock, Users, Award, TrendingUp } from 'lucide-react';
+import { getAboutSections, getWhyChooseUs } from '../lib/public';
+import type { PublicAboutSection, PublicWhyChooseUs } from '../lib/public';
 
-function SectionCard({ id, icon: Icon, title, children, delay = 0 }: {
-  id: string; icon: React.ElementType; title: string; children: React.ReactNode; delay?: number;
+function SectionCard({ icon: Icon, title, children, delay = 0 }: {
+  icon: React.ElementType; title: string; children: React.ReactNode; delay?: number;
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -11,7 +12,6 @@ function SectionCard({ id, icon: Icon, title, children, delay = 0 }: {
   return (
     <motion.div
       ref={ref}
-      id={id}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay }}
@@ -26,9 +26,96 @@ function SectionCard({ id, icon: Icon, title, children, delay = 0 }: {
   );
 }
 
+function renderContent(section: PublicAboutSection) {
+  if (section.sectionKey === 'valores') {
+    const items = section.content.split('\n').filter(Boolean);
+    return (
+      <ul className="space-y-2">
+        {items.map((item, i) => {
+          const colonIdx = item.indexOf(': ');
+          if (colonIdx > 0) {
+            const label = item.slice(0, colonIdx);
+            const desc = item.slice(colonIdx + 2);
+            return (
+              <li key={i} className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
+                <span><strong>{label}:</strong> {desc}</span>
+              </li>
+            );
+          }
+          return (
+            <li key={i} className="flex items-start gap-2">
+              <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
+              <span>{item}</span>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+  const paragraphs = section.content.split('\n\n').filter(Boolean);
+  return paragraphs.map((p, i) => (
+    <p key={i} className={i > 0 ? 'mt-3' : ''}>{p}</p>
+  ));
+}
+
+function AboutSkeleton() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <div key={i} className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-100 animate-pulse">
+          <div className="w-14 h-14 bg-slate-200 rounded-xl mb-5" />
+          <div className="h-6 bg-slate-200 rounded w-3/4 mb-4" />
+          <div className="space-y-2">
+            <div className="h-4 bg-slate-200 rounded w-full" />
+            <div className="h-4 bg-slate-200 rounded w-5/6" />
+            <div className="h-4 bg-slate-200 rounded w-4/6" />
+          </div>
+        </div>
+      ))}
+      <div className="bg-green-800 rounded-2xl p-8 animate-pulse">
+        <div className="h-6 bg-green-700/50 rounded w-2/3 mb-4" />
+        <div className="space-y-4">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-green-700/50 rounded-lg shrink-0" />
+              <div className="flex-1 space-y-1">
+                <div className="h-4 bg-green-700/50 rounded w-1/2" />
+                <div className="h-3 bg-green-700/50 rounded w-2/3" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function About() {
+  const [aboutSections, setAboutSections] = useState<PublicAboutSection[]>([]);
+  const [whyChoose, setWhyChoose] = useState<PublicWhyChooseUs[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    Promise.all([getAboutSections(), getWhyChooseUs()])
+      .then(([sections, items]) => {
+        if (!mounted) return;
+        setAboutSections(sections);
+        setWhyChoose(items);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!mounted) return;
+        setLoading(false);
+      });
+    return () => { mounted = false; };
+  }, []);
+
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  const hasData = aboutSections.length > 0;
 
   return (
     <section className="py-20 bg-slate-50">
@@ -52,108 +139,40 @@ export default function About() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <SectionCard id="historia" icon={Clock} title="Historia" delay={0}>
-            <p>
-              Tekny Campo Soluciones Agropecuarias nació con el propósito de apoyar el desarrollo del sector agropecuario colombiano mediante soluciones innovadoras y acompañamiento técnico especializado.
-            </p>
-            <p className="mt-3">
-              Desde sus inicios, la empresa ha trabajado junto a productores, asociaciones, entidades públicas y organizaciones rurales, ofreciendo insumos, capacitación y asesoría para mejorar la productividad y sostenibilidad del campo.
-            </p>
-            <p className="mt-3">
-              A lo largo de su trayectoria, Tekny Campo ha participado en proyectos agropecuarios que han contribuido al fortalecimiento de comunidades rurales y al crecimiento del sector agrícola y ganadero en la región.
-            </p>
-          </SectionCard>
+        {loading && <AboutSkeleton />}
 
-          <SectionCard id="mision" icon={Target} title="Misión" delay={0.1}>
-            <p>
-              Somos una empresa comprometida con el desarrollo del sector agropecuario, dedicada a brindar soluciones tecnológicas, suministro de insumos, capacitación y acompañamiento técnico, orientados a mejorar la productividad, sostenibilidad y competitividad del campo colombiano, promoviendo el crecimiento integral de productores y comunidades rurales.
-            </p>
-          </SectionCard>
-
-          <SectionCard id="vision" icon={Eye} title="Visión" delay={0.2}>
-            <p>
-              Ser una empresa líder y reconocida en el sector agropecuario colombiano por brindar soluciones innovadoras, sostenibles y de alta calidad, contribuyendo al desarrollo productivo del campo, al fortalecimiento de las comunidades rurales y a la transformación tecnológica del sector agropecuario.
-            </p>
-          </SectionCard>
-
-          <SectionCard id="objetivos" icon={Flag} title="Objetivo General" delay={0.1}>
-            <p>
-              Impulsar el desarrollo sostenible y productivo del sector agropecuario colombiano mediante soluciones integrales, asistencia técnica, capacitación y suministro de insumos de alta calidad.
-            </p>
-          </SectionCard>
-
-          <SectionCard id="valores" icon={Heart} title="Valores Corporativos" delay={0.2}>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Compromiso:</strong> Dedicación total con el campo colombiano.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Responsabilidad:</strong> Cumplimiento y seriedad en cada proyecto.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Innovación:</strong> Búsqueda constante de nuevas soluciones.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Calidad:</strong> Excelencia en productos y servicios.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Servicio al cliente:</strong> Atención personalizada y cercana.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                <span><strong>Amor por el campo:</strong> Pasión por el desarrollo rural.</span>
-              </li>
-            </ul>
-          </SectionCard>
-
-          <div className="bg-green-800 rounded-2xl p-8 text-white flex flex-col justify-center">
-            <h3 className="text-xl font-bold mb-4">¿Por qué elegirnos?</h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center shrink-0">
-                  <Award className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold">Experiencia Comprobada</div>
-                  <div className="text-sm text-green-200">Proyectos ejecutados con éxito</div>
+        {!loading && hasData && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {aboutSections.map((section, idx) => (
+              <SectionCard
+                key={section.id}
+                icon={section.icon}
+                title={section.title}
+                delay={Math.min(idx * 0.1, 0.2)}
+              >
+                {renderContent(section)}
+              </SectionCard>
+            ))}
+            {whyChoose.length > 0 && (
+              <div className="bg-green-800 rounded-2xl p-8 text-white flex flex-col justify-center">
+                <h3 className="text-xl font-bold mb-4">¿Por qué elegirnos?</h3>
+                <div className="space-y-4">
+                  {whyChoose.map((item) => (
+                    <div key={item.id} className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center shrink-0">
+                        <item.icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="font-semibold">{item.title}</div>
+                        <div className="text-sm text-green-200">{item.description}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center shrink-0">
-                  <Users className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold">Acompañamiento Técnico</div>
-                  <div className="text-sm text-green-200">Asesoría especializada permanente</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center shrink-0">
-                  <TrendingUp className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold">Soluciones Integrales</div>
-                  <div className="text-sm text-green-200">Todo para tu producción</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center shrink-0">
-                  <Heart className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-semibold">Compromiso Rural</div>
-                  <div className="text-sm text-green-200">Pasión por el campo colombiano</div>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

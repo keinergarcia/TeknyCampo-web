@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Menu, X, Clock, Target, Eye, Flag, Heart, Wheat, Sprout, Beef, GraduationCap } from 'lucide-react';
-import logoImg from '../assets/images/logos/teknycampo-icon.png';
+import { ChevronDown, Menu, X, Clock, Target, Eye, Flag, Heart } from 'lucide-react';
+import logoImg from '../assets/images/logos/teknycampo-icon.webp';
 
 interface DropdownItem {
   label: string;
@@ -21,7 +21,7 @@ const itemVariants = {
   hidden: { opacity: 0, x: -15 },
   visible: (i: number) => ({
     opacity: 1, x: 0,
-    transition: { delay: i * 0.06, duration: 0.3, ease: 'easeOut' },
+    transition: { delay: i * 0.06, duration: 0.3, ease: 'easeOut' as const },
   }),
 };
 
@@ -56,9 +56,9 @@ function NavDropdown({ label, items, isScrolled }: NavDropdownProps) {
     >
       <button
         onClick={handleClick}
-        className={`flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors rounded-md ${
-          isScrolled ? 'text-slate-700 hover:text-green-700' : 'text-white hover:text-green-200'
-        } ${isOpen ? (isScrolled ? 'text-green-700 bg-green-50' : 'text-white bg-white/15') : ''}`}
+        className={`flex items-center gap-1.5 px-5 py-3 text-sm font-medium transition-colors rounded-xl ${
+          isScrolled ? 'text-slate-700 hover:text-green-700 hover:bg-green-50' : 'text-white hover:text-green-200 hover:bg-white/15'
+        } ${isOpen ? (isScrolled ? 'text-green-700 bg-green-50' : 'text-white bg-white/20') : ''}`}
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
@@ -131,26 +131,20 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const teknyItems: DropdownItem[] = [
-    { label: 'Historia', href: '/#historia', icon: Clock },
-    { label: 'Misión', href: '/#mision', icon: Target },
-    { label: 'Visión', href: '/#vision', icon: Eye },
-    { label: 'Objetivo General', href: '/#objetivos', icon: Flag },
-    { label: 'Valores Corporativos', href: '/#valores', icon: Heart, fullWidth: true },
-  ];
-
-  const servicesItems: DropdownItem[] = [
-    { label: 'Insumos Agropecuarios', href: '/servicios#insumos', icon: Wheat },
-    { label: 'Soluciones Agrícolas', href: '/servicios#agricolas', icon: Sprout },
-    { label: 'Soluciones Ganaderas', href: '/servicios#ganaderas', icon: Beef },
-    { label: 'Capacitación y Acompañamiento', href: '/servicios#capacitacion', icon: GraduationCap },
+    { label: 'Historia', href: '/acerca-de/historia', icon: Clock },
+    { label: 'Misión', href: '/acerca-de/mision', icon: Target },
+    { label: 'Visión', href: '/acerca-de/vision', icon: Eye },
+    { label: 'Objetivo General', href: '/acerca-de/objetivos', icon: Flag },
+    { label: 'Valores Corporativos', href: '/acerca-de/valores', icon: Heart, fullWidth: true },
   ];
 
   const navLinks = [
     { label: 'Inicio', href: '/' },
     { label: 'Tekny Campo', href: '', items: teknyItems },
-    { label: 'Servicios', href: '', items: servicesItems },
+    { label: 'Servicios', href: '/servicios' },
     { label: 'Experiencia', href: '/productos' },
     { label: 'Noticias', href: '/noticias' },
+    { label: 'Capacitaciones', href: '/capacitaciones' },
     { label: 'Trabaja con Nosotros', href: '/trabaja-con-nosotros' },
     { label: 'Contacto', href: '/contacto' },
   ];
@@ -177,7 +171,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1.5">
             {navLinks.map((link) =>
               link.items ? (
                 <NavDropdown key={link.label} label={link.label} items={link.items} isScrolled={isScrolled} />
@@ -185,14 +179,14 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`px-5 py-3 text-sm font-medium rounded-xl transition-colors ${
                     isScrolled
                       ? location.pathname === link.href
                         ? 'text-green-700 bg-green-50'
                         : 'text-slate-700 hover:text-green-700 hover:bg-green-50'
                       : location.pathname === link.href
-                        ? 'text-white bg-white/20'
-                        : 'text-white hover:text-green-200 hover:bg-white/10'
+                        ? 'text-white bg-white/25'
+                        : 'text-white hover:text-green-200 hover:bg-white/15'
                   }`}
                 >
                   {link.label}
@@ -218,11 +212,12 @@ export default function Navbar() {
 
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
+            <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-green-100 shadow-2xl"
+            onKeyDown={(e) => { if (e.key === 'Escape') setMobileMenuOpen(false); }}
           >
             <div className="px-4 py-3 space-y-1">
               {navLinks.map((link) =>

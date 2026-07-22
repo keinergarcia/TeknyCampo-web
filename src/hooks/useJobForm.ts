@@ -1,19 +1,12 @@
 import { useState } from 'react';
-import { submitApplication } from '../lib/supabase';
-
-interface JobFormData {
-  nombre: string;
-  email: string;
-  telefono: string;
-  cargo: string;
-  mensaje: string;
-}
+import { submitJobApplication } from '../lib/public';
 
 export function useJobForm() {
-  const [formData, setFormData] = useState<JobFormData>({
+  const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     telefono: '',
+    cedula: '',
     cargo: '',
     mensaje: '',
   });
@@ -37,7 +30,7 @@ export function useJobForm() {
     setError('');
     setSending(true);
     try {
-      const { error: err } = await submitApplication({ ...formData, archivo: file });
+      const { error: err } = await submitJobApplication({ ...formData, archivo: file });
       if (err) throw err;
       setSubmitted(true);
     } catch {
