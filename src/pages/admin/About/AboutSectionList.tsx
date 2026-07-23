@@ -7,7 +7,7 @@ import { FormTextarea } from '../../../components/admin/common/Form/FormTextarea
 import { useAboutSections } from '../../../hooks/admin/useAboutSections';
 import { useNotifications } from '../../../hooks/useNotifications';
 import { getErrorMessage } from '../../../lib/errors';
-import { uploadImage, getPublicImageUrl } from '../../../lib/storage';
+import { uploadImage, deleteImage, getPublicImageUrl } from '../../../lib/storage';
 import type { AboutSection } from '../../../types/admin';
 
 const SECTION_KEY_LABELS: Record<string, string> = {
@@ -44,8 +44,11 @@ export function AboutSectionList() {
   const handleImageUpload = async (section: AboutSection, file: File) => {
     setUploading((prev) => ({ ...prev, [section.id]: true }));
     try {
+      if (section.image_url) {
+        await deleteImage(section.image_url);
+      }
       const ext = file.name.split('.').pop();
-      const path = `about/${section.section_key}.${ext}`;
+      const path = `about/${section.section_key}_${Date.now()}.${ext}`;
       await uploadImage(file, path);
       setEditing((prev) => ({ ...prev, [section.id]: { ...prev[section.id], image_url: path } }));
       notify({ type: 'success', message: 'Imagen subida correctamente' });
@@ -147,9 +150,9 @@ export function AboutSectionList() {
 
                 <FormField label="Imagen">
                   <div className="space-y-3">
-                    {(changes?.image_url || section.image_url) && (
+                    {(changes?.image_url ?? section.image_url) && (
                       <img
-                        src={getPublicImageUrl(changes?.image_url || section.image_url!)}
+                        src={getPublicImageUrl(changes?.image_url ?? section.image_url!)}
                         alt=""
                         className="w-full max-w-sm h-auto max-h-[300px] object-contain bg-gray-50 p-2 rounded-lg border border-gray-200"
                       />
@@ -168,10 +171,18 @@ export function AboutSectionList() {
                           }}
                         />
                       </label>
-                      {(changes?.image_url || section.image_url) && (
+                      {(changes?.image_url ?? section.image_url) && (
                         <button
                           type="button"
-                          onClick={() => setEditing((prev) => ({ ...prev, [section.id]: { ...prev[section.id], image_url: null } }))}
+                          onClick={async () => {
+                            const pathToDelete = changes?.image_url ?? section.image_url;
+                            if (pathToDelete) {
+                              try {
+                                await deleteImage(pathToDelete);
+                              } catch {}
+                            }
+                            setEditing((prev) => ({ ...prev, [section.id]: { ...prev[section.id], image_url: null } }));
+                          }}
                           className="text-xs text-red-600 hover:text-red-800"
                         >
                           Eliminar imagen
