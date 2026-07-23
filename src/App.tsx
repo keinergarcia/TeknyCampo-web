@@ -4,15 +4,10 @@ import { SEO } from './components/SEO';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Products from './components/Products';
-import News from './components/News';
-import WorkWithUs from './components/WorkWithUs';
-import Contact from './components/Contact';
 import { AdminGuard } from './components/admin/AdminGuard';
 import { AdminLayout } from './components/admin/AdminLayout';
 
+// Page-level lazy imports
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 const NewsPage = lazy(() => import('./pages/NewsPage'));
@@ -20,6 +15,16 @@ const WorkWithUsPage = lazy(() => import('./pages/WorkWithUsPage'));
 const CapacitacionesPage = lazy(() => import('./pages/CapacitacionesPage'));
 const AcercaDePage = lazy(() => import('./pages/AcercaDePage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+
+// Home section lazy imports (below-the-fold)
+const About = lazy(() => import('./components/About'));
+const Services = lazy(() => import('./components/Services'));
+const Products = lazy(() => import('./components/Products'));
+const News = lazy(() => import('./components/News'));
+const WorkWithUs = lazy(() => import('./components/WorkWithUs'));
+const Contact = lazy(() => import('./components/Contact'));
+
+const SectionFallback = () => <div className="h-64 animate-pulse bg-slate-50" />;
 const Login = lazy(() => import('./pages/admin/Login').then(m => ({ default: m.Login })));
 const ForgotPassword = lazy(() => import('./pages/admin/ForgotPassword').then(m => ({ default: m.ForgotPassword })));
 const UpdatePassword = lazy(() => import('./pages/admin/UpdatePassword').then(m => ({ default: m.UpdatePassword })));
@@ -78,12 +83,15 @@ function PublicLayout() {
   );
 }
 
+const SITE_URL = import.meta.env.VITE_SITE_URL || `${window.location.origin}/TeknyCampo-web`;
+const BASE_PATH = import.meta.env.VITE_BASE_PATH || '/TeknyCampo-web';
+
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Tekny Campo Soluciones Agropecuarias',
-  url: 'https://teknycampo.com',
-  logo: 'https://teknycampo.com/logo.png',
+  url: SITE_URL,
+  logo: `${SITE_URL}/favicon.svg`,
   description: 'Soluciones agropecuarias innovadoras para el campo colombiano. Insumos, tecnología, capacitación y asistencia técnica.',
   address: { '@type': 'PostalAddress', addressCountry: 'CO' },
 };
@@ -94,23 +102,24 @@ function Home() {
       <SEO
         title="Inicio"
         description="Tekny Campo Soluciones Agropecuarias — Tecnología al servicio del campo. Insumos, sistemas de riego, nutrición animal, asistencia técnica y capacitación para productores colombianos."
-        canonical="https://teknycampo.com"
         jsonLd={organizationSchema}
       />
       <Hero />
-      <About />
-      <Services />
-      <Products />
-      <News />
-      <WorkWithUs />
-      <Contact />
+      <Suspense fallback={<SectionFallback />}>
+        <About />
+        <Services />
+        <Products />
+        <News />
+        <WorkWithUs />
+        <Contact />
+      </Suspense>
     </>
   );
 }
 
 function App() {
   return (
-    <BrowserRouter basename="/TeknyCampo-web">
+    <BrowserRouter basename={BASE_PATH}>
       <div className="min-h-screen bg-white">
         <Suspense fallback={
           <div className="flex items-center justify-center min-h-[60vh]">

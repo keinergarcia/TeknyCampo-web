@@ -26,14 +26,14 @@ export function ConfirmDialog({ open, title, message, confirmLabel, cancelLabel,
           <button
             onClick={onCancel}
             disabled={loading}
-            className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+            className="px-5 py-3 sm:px-4 sm:py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
           >
             {cancelLabel ?? 'Cancelar'}
           </button>
           <button
             onClick={onConfirm}
             disabled={loading}
-            className={`px-4 py-2 text-sm text-white rounded-lg disabled:opacity-50 ${confirmColor}`}
+            className={`px-5 py-3 sm:px-4 sm:py-2 text-sm text-white rounded-lg disabled:opacity-50 ${confirmColor}`}
           >
             {loading ? 'Procesando...' : (confirmLabel ?? 'Confirmar')}
           </button>

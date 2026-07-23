@@ -1,8 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
+import { getSocialLinks } from '../lib/public';
+import type { PublicSocialLink } from '../lib/public';
 import logoImg from '../assets/images/logos/teknycampo-icon.webp';
 
 export default function Footer() {
+  const [socialLinks, setSocialLinks] = useState<PublicSocialLink[]>([]);
+
+  useEffect(() => {
+    getSocialLinks().then(setSocialLinks).catch(() => {});
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -21,17 +30,18 @@ export default function Footer() {
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               Trabajamos con compromiso, responsabilidad e innovación para fortalecer el sector rural colombiano, brindando soluciones integrales orientadas al desarrollo agrícola y ganadero.
             </p>
-            <div className="flex items-center gap-3">
-              <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors" aria-label="Facebook" title="Facebook">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors" aria-label="Instagram" title="Instagram">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors" aria-label="LinkedIn" title="LinkedIn">
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex items-center gap-3">
+                {socialLinks.map((link) => (
+                  <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer"
+                    className="w-11 h-11 sm:w-10 sm:h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors"
+                    aria-label={link.platform} title={link.platform}
+                  >
+                    <link.icon className="w-5 h-5" />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           <div>
@@ -104,7 +114,7 @@ export default function Footer() {
           </p>
           <button
             onClick={scrollToTop}
-            className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"
+            className="w-11 h-11 sm:w-10 sm:h-10 bg-green-700 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"
             aria-label="Volver arriba"
           >
             <ArrowUp className="w-5 h-5" />

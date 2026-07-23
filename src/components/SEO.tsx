@@ -12,7 +12,7 @@ interface SEOProps {
   jsonLd?: Record<string, unknown>;
 }
 
-const BASE_URL = 'https://teknycampo.com';
+const BASE_URL = import.meta.env.VITE_SITE_URL || `${window.location.origin}/TeknyCampo-web`;
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
 
 export function SEO({
@@ -27,7 +27,7 @@ export function SEO({
   jsonLd,
 }: SEOProps) {
   const fullTitle = `${title} | Tekny Campo`;
-  const pageUrl = canonical || BASE_URL;
+  const pageUrl = canonical || `${BASE_URL}${window.location.pathname.replace(/\/+$/, '')}`;
 
   return (
     <Helmet>

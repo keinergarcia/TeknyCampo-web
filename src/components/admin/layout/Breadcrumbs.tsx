@@ -33,7 +33,7 @@ export function Breadcrumbs() {
   });
 
   return (
-    <nav className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+    <nav className="flex items-center gap-2 text-sm text-gray-500 mb-4 flex-wrap">
       {crumbs.map((crumb) => (
         <span key={crumb.path} className="flex items-center gap-2">
           {crumb.isLast ? (

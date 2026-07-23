@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Target, Eye, Flag, Heart, Sprout } from 'lucide-react';
+import { Sprout, ArrowLeft, Heart } from 'lucide-react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 import { getAboutSections } from '../lib/public';
 import { getPublicImageUrl } from '../lib/storage';
 import type { PublicAboutSection } from '../lib/public';
+import { ABOUT_ICON_MAP } from '../lib/public';
 import pageBg from '../assets/images/backgrounds/hero-bg.webp';
-
-const SECTION_ICONS: Record<string, React.ElementType> = {
-  historia: Clock,
-  mision: Target,
-  vision: Eye,
-  objetivos: Flag,
-  valores: Heart,
-};
 
 const SECTION_LABELS: Record<string, string> = {
   historia: 'Historia',
@@ -37,55 +30,95 @@ function renderContent(section: PublicAboutSection) {
 
   if (section.sectionKey === 'valores') {
     const items = section.content.split('\n').filter(Boolean);
+    const cards = items.map((item, i) => {
+      const colonIdx = item.indexOf(': ');
+      if (colonIdx > 0) {
+        const label = item.slice(0, colonIdx);
+        const desc = item.slice(colonIdx + 2);
+        return (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center mb-3">
+              <Heart className="w-5 h-5 text-rose-600" />
+            </div>
+            <h2 className="font-bold text-slate-900 mb-1">{label}</h2>
+            <p className="text-sm text-slate-600">{desc}</p>
+          </motion.div>
+        );
+      }
+      return (
+        <div key={i} className="bg-white rounded-xl p-5 border border-slate-100">
+          <p className="text-slate-700">{item}</p>
+        </div>
+      );
+    });
+
+    if (imageUrl) {
+      return (
+        <div className="flex flex-col md:flex-row gap-6 lg:gap-8 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full md:w-[45%] shrink-0"
+          >
+            <div className="flex items-center justify-center bg-gray-50 rounded-xl shadow-md p-2">
+              <img src={imageUrl} alt="" loading="lazy" className="max-w-full max-h-[60vh] w-auto h-auto object-contain rounded-lg" />
+            </div>
+          </motion.div>
+          <div className="flex-1 min-w-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{cards}</div>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="space-y-6">
-        {imageUrl && (
-          <img src={imageUrl} alt="" loading="lazy" className="w-full max-w-2xl h-64 object-cover rounded-xl shadow-md" />
-        )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {items.map((item, i) => {
-            const colonIdx = item.indexOf(': ');
-            if (colonIdx > 0) {
-              const label = item.slice(0, colonIdx);
-              const desc = item.slice(colonIdx + 2);
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="bg-white rounded-xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center mb-3">
-                    <Heart className="w-5 h-5 text-rose-600" />
-                  </div>
-                  <h2 className="font-bold text-slate-900 mb-1">{label}</h2>
-                  <p className="text-sm text-slate-600">{desc}</p>
-                </motion.div>
-              );
-            }
-            return (
-              <div key={i} className="bg-white rounded-xl p-5 border border-slate-100">
-                <p className="text-slate-700">{item}</p>
-              </div>
-            );
-          })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{cards}</div>
+    );
+  }
+
+  const paragraphs = section.content.split('\n\n').filter(Boolean);
+
+  if (imageUrl) {
+    return (
+      <div className="space-y-6 max-w-5xl">
+        <div className="flex flex-col md:flex-row gap-6 lg:gap-8 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full md:w-[45%] shrink-0"
+          >
+            <div className="flex items-center justify-center bg-gray-50 rounded-xl shadow-md p-2">
+              <img src={imageUrl} alt="" loading="lazy" className="max-w-full max-h-[60vh] w-auto h-auto object-contain rounded-lg" />
+            </div>
+          </motion.div>
+          <div className="flex-1 min-w-0 space-y-6">
+            {paragraphs.map((p, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="text-slate-600 leading-relaxed text-lg"
+              >
+                {p}
+              </motion.p>
+            ))}
+          </div>
         </div>
       </div>
     );
   }
-  const paragraphs = section.content.split('\n\n').filter(Boolean);
+
   return (
     <div className="space-y-6 max-w-3xl">
-      {imageUrl && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <img src={imageUrl} alt="" loading="lazy" className="w-full max-w-2xl h-64 object-cover rounded-xl shadow-md" />
-        </motion.div>
-      )}
       {paragraphs.map((p, i) => (
         <motion.p
           key={i}
@@ -124,7 +157,7 @@ export default function AcercaDePage() {
   }
 
   const currentSection = sections.find((s) => s.sectionKey === section);
-  const SectionIcon = SECTION_ICONS[section] || Sprout;
+  const SectionIcon = ABOUT_ICON_MAP[section] || Sprout;
   const gradient = SECTION_COLORS[section] || 'from-green-500 to-green-600';
 
   const seoTitle = SECTION_LABELS[section] || section;
@@ -142,11 +175,10 @@ export default function AcercaDePage() {
       <SEO
         title={seoTitle}
         description={seoDescription}
-        canonical={`https://teknycampo.com/acerca-de/${section}`}
       />
       <div className="min-h-screen bg-slate-50">
-      <div className="relative pt-32 pb-16 min-h-[320px] overflow-hidden">
-        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="relative pt-32 pb-16 overflow-hidden bg-gray-900 min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] xl:min-h-[480px]">
+        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover object-[5%_55%] sm:object-[10%_55%] md:object-[15%_50%] lg:object-[25%_40%] xl:object-[35%_35%]" />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm mb-6">

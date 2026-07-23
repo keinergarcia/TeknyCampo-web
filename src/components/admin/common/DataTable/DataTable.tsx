@@ -107,7 +107,7 @@ function DataTableInner<T extends { id: string; active?: boolean }>({
                           {onToggle && row.active !== undefined && (
                             <button
                               onClick={() => onToggle(row.id, !row.active)}
-                              className={`px-2 py-1 rounded text-xs font-medium ${
+                              className={`px-2.5 py-1.5 sm:px-2 sm:py-1 rounded text-xs font-medium ${
                                 row.active
                                   ? 'bg-green-100 text-green-700 hover:bg-green-200'
                                   : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
@@ -117,17 +117,17 @@ function DataTableInner<T extends { id: string; active?: boolean }>({
                             </button>
                           )}
                           {onEdit && (
-                            <button onClick={() => onEdit(row.id)} className="px-2 py-1 rounded text-xs bg-blue-100 text-blue-700 hover:bg-blue-200">
+                            <button onClick={() => onEdit(row.id)} className="px-2.5 py-1.5 sm:px-2 sm:py-1 rounded text-xs bg-blue-100 text-blue-700 hover:bg-blue-200">
                               Ver
                             </button>
                           )}
                           {onDownload && (
-                            <button onClick={() => onDownload(row.id)} className="px-2 py-1 rounded text-xs bg-emerald-100 text-emerald-700 hover:bg-emerald-200">
+                            <button onClick={() => onDownload(row.id)} className="px-2.5 py-1.5 sm:px-2 sm:py-1 rounded text-xs bg-emerald-100 text-emerald-700 hover:bg-emerald-200">
                               {downloadLabel ?? 'Descargar'}
                             </button>
                           )}
                           {onDelete && (
-                            <button onClick={() => onDelete(row.id)} className="px-2 py-1 rounded text-xs bg-red-100 text-red-700 hover:bg-red-200">
+                            <button onClick={() => onDelete(row.id)} className="px-2.5 py-1.5 sm:px-2 sm:py-1 rounded text-xs bg-red-100 text-red-700 hover:bg-red-200">
                               Eliminar
                             </button>
                           )}
@@ -147,7 +147,7 @@ function DataTableInner<T extends { id: string; active?: boolean }>({
                 <button
                   disabled={page <= 1}
                   onClick={() => onPageChange(page - 1)}
-                  className="px-3 py-1 rounded border border-gray-300 disabled:opacity-50 hover:bg-gray-50"
+                  className="px-3 py-1.5 sm:py-1 rounded border border-gray-300 disabled:opacity-50 hover:bg-gray-50"
                 >
                   Anterior
                 </button>
@@ -166,7 +166,7 @@ function DataTableInner<T extends { id: string; active?: boolean }>({
                     <button
                       key={pageNum}
                       onClick={() => onPageChange(pageNum)}
-                      className={`px-3 py-1 rounded border ${pageNum === page ? 'bg-green-700 text-white border-green-700' : 'border-gray-300 hover:bg-gray-50'}`}
+                      className={`px-3 py-1.5 sm:py-1 rounded border ${pageNum === page ? 'bg-green-700 text-white border-green-700' : 'border-gray-300 hover:bg-gray-50'}`}
                     >
                       {pageNum}
                     </button>
@@ -175,7 +175,7 @@ function DataTableInner<T extends { id: string; active?: boolean }>({
                 <button
                   disabled={page >= totalPages}
                   onClick={() => onPageChange(page + 1)}
-                  className="px-3 py-1 rounded border border-gray-300 disabled:opacity-50 hover:bg-gray-50"
+                  className="px-3 py-1.5 sm:py-1 rounded border border-gray-300 disabled:opacity-50 hover:bg-gray-50"
                 >
                   Siguiente
                 </button>

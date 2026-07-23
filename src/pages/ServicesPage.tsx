@@ -80,12 +80,11 @@ export default function ServicesPage() {
       <SEO
         title="Servicios"
         description="Soluciones integrales para tu producción agropecuaria. Insumos, soluciones agrícolas y ganaderas con tecnología e innovación."
-        canonical="https://teknycampo.com/servicios"
       />
       <div className="min-h-screen bg-white">
-      <div className="relative pt-32 pb-12 min-h-[320px] overflow-hidden">
-        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
+      <div className="relative pt-32 pb-12 overflow-hidden bg-gray-900 min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] xl:min-h-[480px]">
+        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover object-[5%_55%] sm:object-[10%_55%] md:object-[15%_50%] lg:object-[25%_40%] xl:object-[35%_35%]" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm mb-6">
             <ArrowLeft className="w-4 h-4" />

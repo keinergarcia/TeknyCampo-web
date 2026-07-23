@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FormField } from './FormField';
 
 interface FormImageUploadProps {
@@ -13,9 +13,16 @@ export function FormImageUpload({ label, currentUrl, onUpload, uploading, error 
   const [preview, setPreview] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    if (preview) URL.revokeObjectURL(preview);
     setPreview(URL.createObjectURL(file));
     onUpload(file);
   };
@@ -26,8 +33,8 @@ export function FormImageUpload({ label, currentUrl, onUpload, uploading, error 
     <FormField label={label} error={error}>
       <div className="space-y-2">
         {displayUrl && (
-          <div className="relative w-40 h-32 rounded-lg overflow-hidden border border-gray-200">
-            <img src={displayUrl} alt={label} className="w-full h-full object-cover" />
+          <div className="relative w-full max-w-xs bg-gray-50 rounded-lg overflow-hidden border border-gray-200 aspect-video">
+            <img src={displayUrl} alt={label} className="w-full h-full object-contain p-2" />
           </div>
         )}
         <div className="flex items-center gap-3">
@@ -42,7 +49,7 @@ export function FormImageUpload({ label, currentUrl, onUpload, uploading, error 
             type="button"
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
-            className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+            className="px-4 py-2 sm:px-3 sm:py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
           >
             {uploading ? 'Subiendo...' : currentUrl ? 'Reemplazar imagen' : 'Seleccionar imagen'}
           </button>

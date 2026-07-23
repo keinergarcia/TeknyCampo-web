@@ -151,7 +151,7 @@ export function AboutSectionList() {
                       <img
                         src={getPublicImageUrl(changes?.image_url || section.image_url!)}
                         alt=""
-                        className="w-full max-w-sm h-40 object-cover rounded-lg border border-gray-200"
+                        className="w-full max-w-sm h-auto max-h-[300px] object-contain bg-gray-50 p-2 rounded-lg border border-gray-200"
                       />
                     )}
                     <div className="flex items-center gap-3">

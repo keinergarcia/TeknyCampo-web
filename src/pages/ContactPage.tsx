@@ -34,22 +34,25 @@ function PageContactForm() {
         <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>
       )}
       <form onSubmit={handleSubmit} className="space-y-5">
+        <div aria-hidden="true" className="opacity-0 pointer-events-none h-0 overflow-hidden" tabIndex={-1}>
+          <input type="text" name="honeypot" defaultValue="" />
+        </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Nombre completo</label>
           <input type="text" name="nombre" required value={formData.nombre} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
             placeholder="Tu nombre" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Correo electrónico</label>
           <input type="email" name="email" required value={formData.email} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
             placeholder="tu@email.com" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Asunto</label>
           <select name="asunto" required value={formData.asunto} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
           >
             <option value="">Selecciona un asunto</option>
             {contactSubjects.map((s) => (
@@ -60,7 +63,7 @@ function PageContactForm() {
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Mensaje</label>
           <textarea name="mensaje" rows={4} required value={formData.mensaje} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white resize-none"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white resize-none"
             placeholder="Escribe tu mensaje aquí..." />
         </div>
         <button type="submit" disabled={sending}
@@ -135,12 +138,11 @@ export default function ContactPage() {
       <SEO
         title="Contacto"
         description="Comunícate con Tekny Campo. Estamos ubicados en Colombia para brindarte soluciones agropecuarias, asistencia técnica y acompañamiento."
-        canonical="https://teknycampo.com/contacto"
       />
       <div className="min-h-screen bg-white">
-      <div className="relative pt-32 pb-20 min-h-[320px] overflow-hidden">
-        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
+      <div className="relative pt-32 pb-20 overflow-hidden bg-gray-900 min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] xl:min-h-[480px]">
+        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover object-[5%_55%] sm:object-[10%_55%] md:object-[15%_50%] lg:object-[25%_40%] xl:object-[35%_35%]" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm mb-6">
             <ArrowLeft className="w-4 h-4" />
@@ -153,7 +155,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 pb-20 overflow-x-clip">
         <div ref={ref}>
           {loading && (
             <>
@@ -182,7 +184,7 @@ export default function ContactPage() {
                 <motion.div
                   key={card.id}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1 } : {}}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="relative group"
                 >
@@ -239,7 +241,7 @@ export default function ContactPage() {
 
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
                 <PageContactForm />

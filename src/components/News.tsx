@@ -90,9 +90,9 @@ export default function News() {
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300"
               >
-                <div className="relative h-44 sm:h-52 overflow-hidden">
+                <div className="relative w-full bg-gray-50 overflow-hidden aspect-[4/3]">
                   <img src={item.image} alt={item.title} loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute top-3 left-3">
                     <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-green-700 text-xs font-medium rounded-full">
                       {item.category}

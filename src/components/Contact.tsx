@@ -17,7 +17,7 @@ function SocialLinks({ links }: { links: PublicSocialLink[] }) {
       <div className="flex items-center gap-3">
         {links.map((link) => (
           <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer"
-            className="w-10 h-10 bg-green-700 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"
+            className="w-11 h-11 sm:w-10 sm:h-10 bg-green-700 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors"
             aria-label={link.platform} title={link.platform}
           >
             <link.icon className="w-5 h-5" />
@@ -54,22 +54,25 @@ function ContactForm() {
         <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>
       )}
       <form onSubmit={handleSubmit} className="space-y-5">
+        <div aria-hidden="true" className="opacity-0 pointer-events-none h-0 overflow-hidden" tabIndex={-1}>
+          <input type="text" name="honeypot" defaultValue="" />
+        </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Nombre completo</label>
           <input type="text" name="nombre" required value={formData.nombre} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
             placeholder="Tu nombre" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Correo electrónico</label>
           <input type="email" name="email" required value={formData.email} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
             placeholder="tu@email.com" />
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Asunto</label>
           <select name="asunto" required value={formData.asunto} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
           >
             <option value="">Selecciona un asunto</option>
             {contactSubjects.map((s) => (
@@ -80,7 +83,7 @@ function ContactForm() {
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1.5">Mensaje</label>
           <textarea name="mensaje" rows={4} required value={formData.mensaje} onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white resize-none"
+            className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white resize-none"
             placeholder="Escribe tu mensaje aquí..." />
         </div>
         <button type="submit" disabled={sending}
@@ -133,7 +136,7 @@ export default function Contact() {
   }, []);
 
   return (
-    <section ref={ref} className="py-20 bg-white">
+    <section ref={ref} className="py-20 bg-white overflow-x-clip">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

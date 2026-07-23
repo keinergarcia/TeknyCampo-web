@@ -3,11 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 const MIGRATIONS_DIR = path.join(__dirname, '..', 'supabase', 'migrations');
-const DB_HOST = 'aws-0-ca-central-1.pooler.supabase.com';
-const DB_PORT = 5432;
-const DB_USER = 'postgres.idhlrviiekttjwsnvyda';
-const DB_PASS = 'Keiner1091593201';
-const DB_NAME = 'postgres';
+const DB_HOST = process.env.SUPABASE_DB_HOST || 'aws-0-ca-central-1.pooler.supabase.com';
+const DB_PORT = parseInt(process.env.SUPABASE_DB_PORT || '5432', 10);
+const DB_USER = process.env.SUPABASE_DB_USER || '';
+const DB_PASS = process.env.SUPABASE_DB_PASS || '';
+const DB_NAME = process.env.SUPABASE_DB_NAME || 'postgres';
 
 const migrationOrder = [
   '001_extensions.sql',
@@ -23,12 +23,23 @@ const migrationOrder = [
   '011_triggers.sql',
   '012_rls.sql',
   '013_storage_policies.sql',
+  '014_add_cedula_to_applications.sql',
+  '015_add_store_url_to_services.sql',
+  '016_add_image_url_to_about_sections.sql',
 ];
 
 const results = [];
 let client;
 
 async function connect() {
+  if (!DB_USER || !DB_PASS) {
+    console.error('\n❌ ERROR: Configura SUPABASE_DB_USER y SUPABASE_DB_PASS en el entorno.');
+    console.error('   Ejemplo (PowerShell):');
+    console.error('   $env:SUPABASE_DB_USER="postgres.project_ref"');
+    console.error('   $env:SUPABASE_DB_PASS="your_password"');
+    console.error('   node scripts/run_migrations.cjs\n');
+    process.exit(1);
+  }
   client = new Client({
     host: DB_HOST,
     port: DB_PORT,

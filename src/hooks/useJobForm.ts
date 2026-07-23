@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { submitJobApplication } from '../lib/public';
 
+const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 export function useJobForm() {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -28,9 +30,15 @@ export function useJobForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (!EMAIL_REGEX.test(formData.email)) {
+      setError('Ingresa un correo electrónico válido.');
+      return;
+    }
+
     setSending(true);
     try {
-      const { error: err } = await submitJobApplication({ ...formData, archivo: file });
+      const { error: err } = await submitJobApplication({ ...formData, archivo: file, honeypot: '' });
       if (err) throw err;
       setSubmitted(true);
     } catch {

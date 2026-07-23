@@ -42,11 +42,11 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   return (
     <NotificationContext.Provider value={{ notifications, notify, remove }}>
       {children}
-      <div className="fixed top-4 right-4 z-[60] space-y-2">
+      <div className="fixed top-4 right-2 left-2 sm:right-4 sm:left-auto z-[60] space-y-2">
         {notifications.map((n) => (
           <div
             key={n.id}
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-sm text-white min-w-[280px] animate-slide-in ${
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-sm text-white min-w-0 sm:min-w-[280px] animate-slide-in ${
               n.type === 'success' ? 'bg-green-700' :
               n.type === 'error' ? 'bg-red-600' :
               n.type === 'warning' ? 'bg-yellow-600' :

@@ -69,7 +69,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Heart, Award, TrendingUp,
 };
 
-const ABOUT_ICON_MAP: Record<string, LucideIcon> = {
+export const ABOUT_ICON_MAP: Record<string, LucideIcon> = {
   historia: Clock,
   mision: Target,
   vision: Eye,
@@ -311,6 +311,7 @@ export async function submitJobApplication(data: {
   cargo: string;
   mensaje: string;
   archivo?: File | null;
+  honeypot?: string;
 }): Promise<{ error: Error | null }> {
   if (!supabase) return { error: null };
 
@@ -337,6 +338,7 @@ export async function submitJobApplication(data: {
     cargo: data.cargo,
     mensaje: data.mensaje,
     cv_url: cvUrl,
+    honeypot: data.honeypot || '',
   }]);
 
   if (error) return { error: error as unknown as Error };
@@ -348,9 +350,10 @@ export async function submitContactMessage(data: {
   email: string;
   asunto: string;
   mensaje: string;
+  honeypot?: string;
 }): Promise<{ error: Error | null }> {
   if (!supabase) return { error: null };
-  const { error } = await supabase.from('contact_messages').insert([data]);
+  const { error } = await supabase.from('contact_messages').insert([{ ...data, honeypot: data.honeypot || '' }]);
   if (error) return { error: error as unknown as Error };
   return { error: null };
 }
@@ -393,6 +396,7 @@ export async function submitTrainingApplication(data: {
   telefono: string;
   trainingTitle: string;
   mensaje: string;
+  honeypot?: string;
 }): Promise<{ error: Error | null }> {
   if (!supabase) return { error: null };
   const { error } = await supabase.from('contact_messages').insert([{
@@ -400,6 +404,7 @@ export async function submitTrainingApplication(data: {
     email: data.email,
     asunto: `Inscripción Capacitación: ${data.trainingTitle}`,
     mensaje: `Teléfono: ${data.telefono}\n\n${data.mensaje}`,
+    honeypot: data.honeypot || '',
   }]);
   if (error) return { error: error as unknown as Error };
   return { error: null };

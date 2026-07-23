@@ -196,7 +196,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className="lg:hidden p-2 rounded-md"
+            className="lg:hidden p-3 rounded-md"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={mobileMenuOpen}
@@ -219,12 +219,12 @@ export default function Navbar() {
             className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-green-100 shadow-2xl"
             onKeyDown={(e) => { if (e.key === 'Escape') setMobileMenuOpen(false); }}
           >
-            <div className="px-4 py-3 space-y-1">
+            <div className="px-4 py-3 space-y-1 max-h-[calc(100vh-80px)] overflow-y-auto">
               {navLinks.map((link) =>
                 link.items ? (
                   <div key={link.label}>
                     <button
-                      className={`flex items-center justify-between w-full px-4 py-3 text-sm font-medium rounded-xl transition-all ${
+                      className={`flex items-center justify-between w-full px-4 py-3.5 sm:py-3 text-sm font-medium rounded-xl transition-all ${
                         mobileDropdown === link.label
                           ? 'text-green-700 bg-green-50'
                           : 'text-slate-700 hover:bg-green-50/50'
@@ -255,7 +255,7 @@ export default function Navbar() {
                             >
                               <Link
                                 to={item.href}
-                                className="block px-4 py-2.5 text-sm text-slate-600 rounded-lg hover:bg-green-50 hover:text-green-700 hover:pl-5 transition-all"
+                                className="block px-4 py-3 sm:py-2.5 text-sm text-slate-600 rounded-lg hover:bg-green-50 hover:text-green-700 hover:pl-5 transition-all"
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 {item.label}
@@ -270,7 +270,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className={`block px-4 py-3 text-sm font-medium rounded-xl transition-all ${
+                    className={`block px-4 py-3.5 sm:py-3 text-sm font-medium rounded-xl transition-all ${
                       location.pathname === link.href
                         ? 'text-green-700 bg-green-50'
                         : 'text-slate-700 hover:bg-green-50/50 hover:text-green-700'

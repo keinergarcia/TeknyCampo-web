@@ -75,12 +75,11 @@ export default function WorkWithUsPage() {
       <SEO
         title="Trabaja con Nosotros"
         description="Únete al equipo de Tekny Campo. Envía tu hoja de vida y forma parte de una empresa comprometida con el desarrollo del sector agropecuario colombiano."
-        canonical="https://teknycampo.com/trabaja-con-nosotros"
       />
       <div className="min-h-screen bg-white">
-      <div className="relative pt-32 pb-20 min-h-[320px] overflow-hidden">
-        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
+      <div className="relative pt-32 pb-20 overflow-hidden bg-gray-900 min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] xl:min-h-[480px]">
+        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover object-[5%_55%] sm:object-[10%_55%] md:object-[15%_50%] lg:object-[25%_40%] xl:object-[35%_35%]" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm mb-6">
             <ArrowLeft className="w-4 h-4" />
@@ -93,7 +92,7 @@ export default function WorkWithUsPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 pb-20 overflow-x-clip">
         <div ref={sectionRef}>
           {loading && <BenefitsSkeleton />}
 
@@ -179,33 +178,33 @@ export default function WorkWithUsPage() {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Nombre completo</label>
                     <input type="text" name="nombre" required value={formData.nombre} onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+                      className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
                       placeholder="Tu nombre completo" />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Correo electrónico</label>
                       <input type="email" name="email" required value={formData.email} onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+                        className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
                         placeholder="tu@email.com" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Teléfono</label>
                       <input type="tel" name="telefono" required value={formData.telefono} onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+                        className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
                         placeholder="300 000 0000" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Cédula</label>
                       <input type="text" name="cedula" value={formData.cedula} onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+                        className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
                         placeholder="Número de cédula" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Cargo de interés</label>
                     <select name="cargo" required value={formData.cargo} onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+                      className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
                     >
                       <option value="">Selecciona un cargo</option>
                       {jobOptions.map((opt) => (
@@ -216,7 +215,7 @@ export default function WorkWithUsPage() {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Mensaje / Hoja de vida</label>
                     <textarea name="mensaje" rows={4} value={formData.mensaje} onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white resize-none"
+                      className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white resize-none"
                       placeholder="Cuéntanos sobre ti y tu experiencia..." />
                   </div>
                   <label className="border-2 border-dashed border-slate-200 rounded-lg p-4 text-center hover:border-green-300 transition-colors cursor-pointer block">

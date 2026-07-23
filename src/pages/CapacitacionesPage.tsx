@@ -7,6 +7,8 @@ import { getTrainings, submitTrainingApplication } from '../lib/public';
 import type { PublicTraining } from '../lib/public';
 import pageBg from '../assets/images/backgrounds/hero-bg.webp';
 
+const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
 const MODALITY_LABELS: Record<string, string> = {
   presencial: 'Presencial',
   virtual: 'Virtual',
@@ -91,6 +93,15 @@ export default function CapacitacionesPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedTraining) return;
+
+    if (!EMAIL_REGEX.test(formData.email)) {
+      setFormError('Ingresa un correo electrónico válido.');
+      return;
+    }
+
+    const form = e.currentTarget as HTMLFormElement;
+    const honeypotValue = (form.elements.namedItem('honeypot') as HTMLInputElement)?.value || '';
+
     setSending(true);
     setFormError(null);
     const { error } = await submitTrainingApplication({
@@ -99,6 +110,7 @@ export default function CapacitacionesPage() {
       telefono: formData.telefono,
       trainingTitle: selectedTraining.title,
       mensaje: formData.mensaje,
+      honeypot: honeypotValue,
     });
     setSending(false);
     if (error) {
@@ -113,12 +125,11 @@ export default function CapacitacionesPage() {
       <SEO
         title="Capacitaciones"
         description="Programas de formación técnica y acompañamiento para el sector agropecuario. Capacitación presencial y virtual en Colombia."
-        canonical="https://teknycampo.com/capacitaciones"
       />
       <div className="min-h-screen bg-slate-50">
-      <div className="relative pt-32 pb-16 min-h-[320px] overflow-hidden">
-        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
+      <div className="relative pt-32 pb-16 overflow-hidden bg-gray-900 min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] xl:min-h-[480px]">
+        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover object-[5%_55%] sm:object-[10%_55%] md:object-[15%_50%] lg:object-[25%_40%] xl:object-[35%_35%]" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm mb-6">
             <ArrowLeft className="w-4 h-4" />
@@ -161,9 +172,9 @@ export default function CapacitacionesPage() {
                 >
                   <div className="absolute -inset-0.5 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
                   <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl border border-green-200/50 group">
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative w-full bg-gray-50 overflow-hidden aspect-[4/3]">
                       <img src={training.image_url} alt={training.title} loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500" />
                       <div className="absolute top-3 left-3 flex flex-wrap gap-2">
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${MODALITY_COLORS[training.modality] || 'bg-slate-100 text-slate-700'}`}>
                           {MODALITY_LABELS[training.modality] || training.modality}
@@ -284,6 +295,9 @@ export default function CapacitacionesPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <div aria-hidden="true" className="opacity-0 pointer-events-none h-0 overflow-hidden" tabIndex={-1}>
+                  <input type="text" name="honeypot" defaultValue="" />
+                </div>
                 <div className="bg-green-50 rounded-xl p-4 border border-green-100">
                   <div className="flex items-center gap-3">
                     <GraduationCap className="w-5 h-5 text-green-700 shrink-0" />

@@ -45,7 +45,7 @@ export function TrainingList() {
     {
       key: 'image_url', label: 'Img',
       render: (row) => row.image_url
-        ? <img src={getPublicImageUrl(row.image_url)} alt={row.title} className="w-10 h-10 object-cover rounded" />
+        ? <img src={getPublicImageUrl(row.image_url)} alt={row.title} className="w-10 h-10 object-contain bg-gray-100 rounded" />
         : <span className="text-gray-300 text-xs">—</span>,
     },
     { key: 'title', label: 'Título', sortable: true },

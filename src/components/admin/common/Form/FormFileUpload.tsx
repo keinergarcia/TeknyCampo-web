@@ -41,7 +41,7 @@ export function FormFileUpload({ label, currentUrl, currentName, onUpload, uploa
             type="button"
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
-            className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+            className="px-4 py-2 sm:px-3 sm:py-1.5 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
           >
             {uploading ? 'Subiendo...' : currentUrl ? 'Reemplazar archivo' : 'Seleccionar archivo'}
           </button>

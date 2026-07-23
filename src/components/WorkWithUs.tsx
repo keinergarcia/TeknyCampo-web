@@ -47,7 +47,7 @@ export default function WorkWithUs() {
   }, []);
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-slate-50 overflow-x-clip">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -144,30 +144,33 @@ export default function WorkWithUs() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {error && <div className="p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>}
+                  <div aria-hidden="true" className="opacity-0 pointer-events-none h-0 overflow-hidden" tabIndex={-1}>
+                    <input type="text" name="honeypot" defaultValue="" />
+                  </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Nombre completo</label>
                     <input type="text" name="nombre" required value={formData.nombre} onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                      className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                       placeholder="Tu nombre completo" />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Correo electrónico</label>
                       <input type="email" name="email" required value={formData.email} onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                        className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                         placeholder="tu@email.com" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Teléfono</label>
                       <input type="tel" name="telefono" required value={formData.telefono} onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
+                        className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all"
                         placeholder="300 000 0000" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Cargo de interés</label>
                     <select name="cargo" required value={formData.cargo} onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
+                      className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all bg-white"
                     >
                       <option value="">Selecciona un cargo</option>
                       {jobOptions.map((opt) => (
@@ -178,7 +181,7 @@ export default function WorkWithUs() {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Mensaje / Hoja de vida</label>
                     <textarea name="mensaje" rows={4} value={formData.mensaje} onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3.5 sm:py-3 rounded-lg border border-slate-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all resize-none"
                       placeholder="Cuéntanos sobre ti y tu experiencia..." />
                   </div>
                   <label className="border-2 border-dashed border-slate-200 rounded-lg p-4 text-center hover:border-green-300 transition-colors cursor-pointer block">

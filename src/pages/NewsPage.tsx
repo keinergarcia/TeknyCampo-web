@@ -80,12 +80,11 @@ export default function NewsPage() {
       <SEO
         title="Noticias"
         description="Últimas noticias y artículos sobre el sector agropecuario colombiano. Innovación, tecnología, capacitación y desarrollo rural."
-        canonical="https://teknycampo.com/noticias"
       />
       <div className="min-h-screen bg-white">
-      <div className="relative pt-32 pb-20 min-h-[320px] overflow-hidden">
-        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
+      <div className="relative pt-32 pb-20 overflow-hidden bg-gray-900 min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] xl:min-h-[480px]">
+        <img src={pageBg} alt="" className="absolute inset-0 w-full h-full object-cover object-[5%_55%] sm:object-[10%_55%] md:object-[15%_50%] lg:object-[25%_40%] xl:object-[35%_35%]" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm mb-6">
             <ArrowLeft className="w-4 h-4" />
@@ -134,9 +133,9 @@ export default function NewsPage() {
             <div className="absolute -inset-0.5 bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-500" />
             <div className="relative bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-green-200/50">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="h-64 lg:h-auto overflow-hidden">
+                <div className="overflow-hidden bg-gray-50 min-h-[200px] sm:min-h-[280px] lg:min-h-full flex items-center justify-center">
                   <img src={featured.image} alt={featured.title} loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    className="w-full h-full max-h-[70vh] object-contain p-2 group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <div className="p-8 lg:p-10 flex flex-col justify-center">
                   <div className="flex items-center gap-3 mb-4">
@@ -176,9 +175,9 @@ export default function NewsPage() {
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative w-full bg-gray-50 overflow-hidden aspect-[4/3]">
                   <img src={item.image} alt={item.title} loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute top-3 left-3">
                     <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-green-700 text-xs font-medium rounded-full flex items-center gap-1">
                       <Tag className="w-3 h-3" />
@@ -245,8 +244,8 @@ export default function NewsPage() {
                 >
                   <X className="w-5 h-5 text-white" aria-hidden="true" />
                 </button>
-                <div className="h-56 sm:h-72 md:h-96 overflow-hidden">
-                  <img src={selectedNews.image} alt={selectedNews.title} className="w-full h-full object-cover" />
+                <div className="overflow-hidden bg-gray-50">
+                  <img src={selectedNews.image} alt={selectedNews.title} className="w-full h-auto max-h-[75vh] object-contain" />
                 </div>
                 <div className="p-8 sm:p-12">
                   <div className="flex items-center gap-3 mb-4">

@@ -21,3 +21,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+.env.local
+.env.production
+banner-screenshots/
+hero-shots/

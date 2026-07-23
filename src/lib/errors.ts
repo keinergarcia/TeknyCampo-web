@@ -40,7 +40,7 @@ export function handleSupabaseError(error: unknown): AppError {
 
   for (const [key, [userMsg, code]] of Object.entries(ERROR_MAP)) {
     if (msg.includes(key)) {
-      return new AppError(detail || userMsg, code, detail);
+      return new AppError(userMsg, code, detail || '');
     }
   }
 

@@ -19,7 +19,7 @@ export function Header({ adminName, onLogout }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-600">{adminName}</span>
+        <span className="text-sm text-gray-600 truncate max-w-[100px] lg:max-w-none">{adminName}</span>
         <button
           onClick={onLogout}
           className="flex items-center gap-2 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
