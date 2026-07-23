@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Suspense, lazy, useEffect } from 'react';
 import { SEO } from './components/SEO';
 import Navbar from './components/Navbar';
@@ -57,6 +57,18 @@ const WhyChooseUsForm = lazy(() => import('./pages/admin/WhyChooseUs/WhyChooseUs
 const SocialLinkList = lazy(() => import('./pages/admin/SocialLinks/SocialLinkList').then(m => ({ default: m.SocialLinkList })));
 const SiteConfigPage = lazy(() => import('./pages/admin/SiteConfig/SiteConfigPage').then(m => ({ default: m.SiteConfigPage })));
 
+function RedirectHandler() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const redirect = sessionStorage.getItem('redirect');
+    if (redirect) {
+      sessionStorage.removeItem('redirect');
+      navigate(redirect, { replace: true });
+    }
+  }, [navigate]);
+  return null;
+}
+
 function ScrollToHash() {
   const location = useLocation();
   useEffect(() => {
@@ -73,6 +85,7 @@ function ScrollToHash() {
 function PublicLayout() {
   return (
     <>
+      <RedirectHandler />
       <ScrollToHash />
       <Navbar />
       <main>
