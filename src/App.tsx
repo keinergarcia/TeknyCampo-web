@@ -96,15 +96,15 @@ function PublicLayout() {
   );
 }
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || window.location.origin;
-const BASE_PATH = import.meta.env.VITE_BASE_PATH || '/';
+const SITE_URL = import.meta.env.VITE_SITE_URL || `${window.location.origin}/TeknyCampo-web`;
+const BASE_PATH = import.meta.env.VITE_BASE_PATH || '/TeknyCampo-web';
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Tekny Campo Soluciones Agropecuarias',
   url: SITE_URL,
-  logo: `${SITE_URL}/favicon.svg`,
+  logo: `${SITE_URL}/favicon.png`,
   description: 'Soluciones agropecuarias innovadoras para el campo colombiano. Insumos, tecnología, capacitación y asistencia técnica.',
   address: { '@type': 'PostalAddress', addressCountry: 'CO' },
 };

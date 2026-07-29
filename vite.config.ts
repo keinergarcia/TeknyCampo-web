@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
-const BASE_PATH = (process.env.VITE_BASE_PATH || '/').replace(/\/?$/, '/');
+const BASE_PATH = (process.env.VITE_BASE_PATH || '/TeknyCampo-web').replace(/\/?$/, '/');
 
 export default defineConfig({
   plugins: [
