@@ -7,10 +7,8 @@
   <script>
     (function () {
       var path = window.location.pathname;
-      var base = '/TeknyCampo-web';
-      var subpath = path.startsWith(base + '/') ? path.slice(base.length) : (path === base ? '/' : path);
-      sessionStorage.setItem('redirect', subpath + window.location.search);
-      window.location.replace(base + '/');
+      sessionStorage.setItem('redirect', path + window.location.search);
+      window.location.replace('/');
     })();
   </script>
 </head>

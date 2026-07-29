@@ -42,7 +42,8 @@ export async function checkIsAdmin(): Promise<boolean> {
 export async function resetPassword(email: string) {
   const sb = requireSupabase();
 
-  const redirectTo = `${window.location.origin}/TeknyCampo-web/admin/update-password`;
+  const basePath = import.meta.env.VITE_BASE_PATH || '';
+  const redirectTo = `${window.location.origin}${basePath}/admin/update-password`;
 
   const { error } = await sb.auth.resetPasswordForEmail(email, {
     redirectTo,

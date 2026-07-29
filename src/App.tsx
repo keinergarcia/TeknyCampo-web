@@ -96,8 +96,8 @@ function PublicLayout() {
   );
 }
 
-const SITE_URL = import.meta.env.VITE_SITE_URL || `${window.location.origin}/TeknyCampo-web`;
-const BASE_PATH = import.meta.env.VITE_BASE_PATH || '/TeknyCampo-web';
+const SITE_URL = import.meta.env.VITE_SITE_URL || window.location.origin;
+const BASE_PATH = import.meta.env.VITE_BASE_PATH || '/';
 
 const organizationSchema = {
   '@context': 'https://schema.org',
