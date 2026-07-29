@@ -230,7 +230,7 @@ https://teknycampo.com
 
 ## Autor
 
-**Keiner García Ortiz** — Desarrollador Full Stack
+**Keiner García Ortiz** — Desarrollador
 
 [![GitHub](https://img.shields.io/badge/GitHub-keinergarcia-059669?style=flat-square&logo=github)](https://github.com/keinergarcia)
 
