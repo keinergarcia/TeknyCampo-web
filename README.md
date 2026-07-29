@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="public/favicon.svg" alt="Tekny Campo" width="80" />
+  <img src="https://raw.githubusercontent.com/keinergarcia/TeknyCampo-web/main/public/favicon.png" alt="Tekny Campo" width="80" />
 </p>
 
 <h1 align="center">Tekny Campo Soluciones Agropecuarias</h1>
 
 <p align="center">
-  <strong>Plataforma web corporativa — Gestión de contenido, servicios y formularios</strong>
+  <strong>Sitio web corporativo — Información, servicios y contacto</strong>
 </p>
 
 <p align="center">
@@ -27,7 +27,6 @@
 - [Variables de entorno](#variables-de-entorno)
 - [Scripts](#scripts-disponibles)
 - [Despliegue](#despliegue)
-- [Funcionalidades del panel admin](#funcionalidades-del-panel-admin)
 - [Autor](#autor)
 
 ---
@@ -36,34 +35,22 @@
 
 Página web corporativa de **Tekny Campo Soluciones Agropecuarias**, una empresa colombiana dedicada a brindar soluciones integrales para el sector agropecuario mediante la comercialización de insumos, asistencia técnica, capacitación y acompañamiento a productores rurales.
 
-La plataforma combina un frontend moderno con un panel de administración completo que permite gestionar todo el contenido del sitio en tiempo real a través de **Supabase**, eliminando la necesidad de modificar código para actualizar información.
+El sitio web presenta la información institucional, servicios, productos, noticias y canales de contacto de la empresa.
 
 ---
 
 ## Características
 
-### Público
-
 - Diseño responsive optimizado para móviles, tablets y escritorio
 - Navegación con menús desplegables animados y transiciones fluidas
 - Secciones: Inicio, Tekny Campo, Servicios, Experiencia, Noticias, Capacitaciones, Trabaja con Nosotros y Contacto
-- Formularios de contacto, postulación laboral e inscripción a capacitaciones con envío a Supabase
-- Protección anti-spam mediante honeypot en todos los formularios públicos
-- Validación de campos y expresiones regulares para correos electrónicos
+- Formularios de contacto, postulación laboral e inscripción a capacitaciones
+- Protección anti-spam mediante honeypot en formularios públicos
 - Noticias con vista completa mediante modal
 - Optimización SEO: meta tags, Open Graph, JSON-LD, canonical URL dinámica, sitemap XML y robots.txt
 - Lazy loading de secciones below-the-fold para rendimiento óptimo
 - Accesibilidad WCAG 2.1 AA (roles ARIA, contraste, enfoque visible, landmarks)
 - Routing SPA compatible con GitHub Pages mediante fallback 404.html
-
-### Administración
-
-- Panel protegido con autenticación mediante Supabase Auth
-- CRUD completo de servicios, noticias, capacitaciones, experiencias, entidades, beneficios y más
-- Gestión de imágenes con subida, reemplazo y eliminación desde Storage
-- Gestión de postulaciones laborales y mensajes de contacto
-- Configuración dinámica del sitio (información de contacto, redes sociales, hero stats)
-- Roles de administrador con RLS (Row Level Security)
 
 ---
 
@@ -85,7 +72,7 @@ La plataforma combina un frontend moderno con un panel de administración comple
 
 | Tecnología | Propósito |
 |-----------|-----------|
-| Supabase | Base de datos PostgreSQL, autenticación, storage, RLS |
+| Supabase | Base de datos PostgreSQL y storage |
 | PostgreSQL | Base de datos relacional |
 
 ### DevOps
@@ -94,7 +81,6 @@ La plataforma combina un frontend moderno con un panel de administración comple
 |------------|-----------|
 | GitHub Actions | CI/CD — build y deploy automático |
 | GitHub Pages | Hosting del frontend |
-| ViteImageOptimizer | Optimización automática de imágenes en build |
 
 ---
 
@@ -104,36 +90,30 @@ La plataforma combina un frontend moderno con un panel de administración comple
 teknycampo-web/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # CI/CD a GitHub Pages
+│       └── deploy.yml
 ├── public/
-│   ├── 404.html                # SPA fallback para GitHub Pages
-│   ├── favicon.svg
+│   ├── 404.html
 │   ├── favicon.png
-│   ├── og-image.jpg            # Imagen Open Graph
+│   ├── og-image.jpg
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── scripts/
-│   └── convert-to-webp.mjs     # Conversión batch de imágenes a WebP
+│   └── convert-to-webp.mjs
 ├── src/
-│   ├── assets/images/          # Imágenes estáticas
+│   ├── assets/images/
 │   ├── components/
-│   │   ├── admin/              # Componentes del panel admin
-│   │   │   └── common/Form/    # Formularios reutilizables
 │   │   ├── Footer.tsx
 │   │   ├── Navbar.tsx
-│   │   ├── SEO.tsx             # Meta tags dinámicos
+│   │   ├── SEO.tsx
 │   │   └── ...
-│   ├── data/                   # Datos estáticos
-│   ├── hooks/                  # Hooks personalizados
-│   │   └── admin/              # Hooks del panel admin
+│   ├── data/
+│   ├── hooks/
 │   ├── lib/
-│   │   ├── admin/              # Funciones CRUD del admin
-│   │   ├── errors.ts           # Manejo de errores
-│   │   ├── public.ts           # Consultas públicas a Supabase
-│   │   ├── storage.ts          # Operaciones de Storage
-│   │   └── supabase.ts         # Cliente Supabase
+│   │   ├── errors.ts
+│   │   ├── public.ts
+│   │   ├── storage.ts
+│   │   └── supabase.ts
 │   ├── pages/
-│   │   ├── admin/              # Páginas del panel admin
 │   │   ├── AcercaDePage.tsx
 │   │   ├── CapacitacionesPage.tsx
 │   │   ├── ContactPage.tsx
@@ -143,11 +123,10 @@ teknycampo-web/
 │   │   ├── ServicesPage.tsx
 │   │   └── WorkWithUsPage.tsx
 │   ├── types/
-│   │   └── admin.ts            # Tipos TypeScript
-│   ├── App.tsx                 # Router y layout
-│   └── main.tsx                # Punto de entrada
+│   ├── App.tsx
+│   └── main.tsx
 └── supabase/
-    └── migrations/             # Migraciones SQL (001–016)
+    └── migrations/
 ```
 
 ---
@@ -198,7 +177,7 @@ VITE_BASE_PATH=/TeknyCampo-web
 | `VITE_SITE_URL` | No | URL canónica para SEO. Default: `window.location.origin` + base path |
 | `VITE_BASE_PATH` | No | Base path para assets y router. Default: `/TeknyCampo-web` |
 
-> **Nota:** El sitio depende de Supabase para cargar el contenido dinámico (servicios, noticias, capacitaciones, configuración, redes sociales y formularios). Sin estas variables el frontend se renderiza pero muestra datos vacíos.
+> **Nota:** El sitio depende de Supabase para cargar el contenido dinámico (servicios, noticias, capacitaciones, configuración y formularios). Sin estas variables el frontend se renderiza pero muestra datos vacíos.
 
 ### En producción (GitHub Pages)
 
@@ -244,41 +223,8 @@ El proyecto utiliza **GitHub Actions** para desplegar automáticamente a **GitHu
 ### Sitio publicado
 
 ```
-https://keinergarcia.github.io/TeknyCampo-web/
+https://teknycampo.com
 ```
-
-### Dominio personalizado
-
-Para usar un dominio personalizado, configurar en el CI/CD:
-
-```env
-VITE_SITE_URL=https://tudominio.com
-VITE_BASE_PATH=/
-```
-
-Y agregar el dominio en **Settings → Pages** del repositorio.
-
----
-
-## Funcionalidades del panel admin
-
-| Módulo | Descripción |
-|--------|-------------|
-| **Dashboard** | Resumen del sistema |
-| **Servicios** | CRUD de servicios con íconos, colores y enlace a tienda |
-| **Noticias** | CRUD de noticias con imagen, categoría, autor y featured |
-| **Capacitaciones** | CRUD con imagen, modalidad, precio, instructor y certificado |
-| **Experiencia** | CRUD de items de experiencia empresarial |
-| **Entidades** | CRUD de entidades aliadas con logo |
-| **Beneficios** | CRUD de beneficios laborales con íconos |
-| **Why Choose Us** | CRUD de razones de por qué elegirnos |
-| **Nosotros** | Edición de secciones institucionales (historia, misión, visión, etc.) |
-| **Hero Stats** | CRUD de estadísticas del hero |
-| **Contacto** | Gestión de información de contacto y ubicación |
-| **Redes Sociales** | CRUD de enlaces a redes sociales |
-| **Postulaciones** | Bandeja de postulaciones laborales recibidas |
-| **Mensajes** | Bandeja de mensajes de contacto |
-| **Configuración** | Configuración general del sitio |
 
 ---
 
